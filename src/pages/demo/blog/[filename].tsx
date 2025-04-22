@@ -1,5 +1,4 @@
 // THIS FILE HAS BEEN GENERATED WITH THE TINA CLI.
-// @ts-nocheck
 // This is a demo file once you have tina setup feel free to delete this file
 
 import Head from 'next/head'
@@ -7,7 +6,29 @@ import { useTina } from 'tinacms/dist/react'
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
 import client from '../../../../tina/__generated__/client'
 
-const BlogPage = (props) => {
+interface PostProps {
+  query: string;
+  variables: {
+    relativePath: string;
+  };
+  data: {
+    post: {
+      title: string;
+      body: any;
+    };
+  };
+}
+
+interface PageSectionProps {
+  heading: string;
+  content: string;
+}
+
+interface ContentSectionProps {
+  content: any;
+}
+
+const BlogPage = (props: PostProps) => {
   const { data } = useTina({
     query: props.query,
     variables: props.variables,
@@ -53,7 +74,7 @@ const BlogPage = (props) => {
   )
 }
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async ({ params }: { params: { filename: string } }) => {
   let data = {}
   let query = {}
   let variables = { relativePath: `${params.filename}.md` }
@@ -62,8 +83,9 @@ export const getStaticProps = async ({ params }) => {
     query = res.query
     data = res.data
     variables = res.variables
-  } catch {
+  } catch (err) {
     // swallow errors related to document creation
+    console.log('Error fetching document', err)
   }
 
   return {
@@ -78,9 +100,10 @@ export const getStaticProps = async ({ params }) => {
 
 export const getStaticPaths = async () => {
   const postsListData = await client.queries.postConnection()
+  const edges = postsListData.data.postConnection.edges || []
 
   return {
-    paths: postsListData.data.postConnection.edges.map((post) => ({
+    paths: edges.map((post: any) => ({
       params: { filename: post.node._sys.filename },
     })),
     fallback: false,
@@ -89,7 +112,7 @@ export const getStaticPaths = async () => {
 
 export default BlogPage
 
-const PageSection = (props) => {
+const PageSection = (props: PageSectionProps) => {
   return (
     <>
       <h2>{props.heading}</h2>
@@ -102,7 +125,7 @@ const components = {
   PageSection: PageSection,
 }
 
-const ContentSection = ({ content }) => {
+const ContentSection = ({ content }: ContentSectionProps) => {
   return (
     <div className='relative py-16 bg-white overflow-hidden text-black'>
       <div className='hidden lg:block lg:absolute lg:inset-y-0 lg:h-full lg:w-full'>

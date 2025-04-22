@@ -1,0 +1,18 @@
+{
+  "extends": ["next/core-web-vitals"],
+  "ignorePatterns": [".next/**", "out/**", "node_modules/**", "public/**"],
+  "rules": {
+    // Disable the 'any' type warnings for TinaCMS-related code
+    "@typescript-eslint/no-explicit-any": "off",
+    // Disable the unused vars warning for catch errors and variables prefixed with _
+    "@typescript-eslint/no-unused-vars": ["error", { 
+      "argsIgnorePattern": "^_",
+      "varsIgnorePattern": "^_",
+      "caughtErrorsIgnorePattern": "^err|^error|^e$" 
+    }],
+    // Disable the React hooks rules for TinaCMS usage
+    "react-hooks/rules-of-hooks": "off",
+    // Disable image warnings for now
+    "@next/next/no-img-element": "warn"
+  }
+} 

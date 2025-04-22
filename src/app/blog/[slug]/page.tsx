@@ -1,21 +1,7 @@
-'use client';
-
-import React from 'react';
-import Image from 'next/image';
-import { cn } from '@/lib/utils';
-import { format } from 'date-fns';
-import Link from 'next/link';
-import { useTina } from 'tinacms/dist/react';
-import { TinaMarkdown } from 'tinacms/dist/rich-text';
-
-// This client will be generated after TinaCMS initialization
-// We'll need to handle the case where it might not exist yet
-let client: any;
-try {
-  client = require('../../../../tina/__generated__/client').default;
-} catch (error) {
-  console.warn('Tina client not found. Make sure to run the dev server first.');
-}
+import { Suspense } from 'react';
+import BlogPostClient from './BlogPostClient';
+import client from '../../../../tina/__generated__/client';
+import { notFound } from 'next/navigation';
 
 interface PostPageProps {
   params: {
@@ -23,135 +9,78 @@ interface PostPageProps {
   };
 }
 
-interface PostEdge {
-  node?: {
-    _sys: {
-      filename: string;
-    };
+// Define the expected structure of the fetched Tina data
+interface TinaDataProps {
+  data: any; // Use a more specific type if available from Tina schema
+  query: string;
+  variables: { relativePath: string };
+}
+
+// Fetch data on the server
+async function fetchTinaData(slug: string): Promise<TinaDataProps | null> {
+  console.log(`[Server] Fetching data for slug: ${slug}`);
+  let data = null;
+  let query = '';
+  let variables = { relativePath: '' };
+
+  const possibleExtensions = ['.mdx', '.md'];
+  for (const ext of possibleExtensions) {
+    try {
+      variables.relativePath = `${slug}${ext}`;
+      console.log(`[Server] Trying path: ${variables.relativePath}`);
+      const res = await client.queries.post(variables);
+      query = res.query;
+      data = res.data;
+      variables = res.variables;
+      console.log(`[Server] Found post at: ${variables.relativePath}`);
+      break; // Found it, exit loop
+    } catch (err: any) {
+      // If it's a specific "not found" error, log it lightly, otherwise log the full error
+      if (err.message?.includes('Unable to find record')) {
+        console.log(`[Server] Post not found with extension ${ext}`);
+      } else {
+        console.error(`[Server] Error fetching post with extension ${ext}:`, err);
+        // Optionally re-throw or handle unexpected errors differently
+      }
+    }
+  }
+
+  if (!data) {
+    console.log(`[Server] Post not found for slug: ${slug} after trying extensions.`);
+    return null; // Indicate not found
+  }
+
+  return {
+    data,
+    query,
+    variables,
   };
 }
 
-export default function BlogPostPage({ params }: PostPageProps) {
+export default async function BlogPostPage({ params }: PostPageProps) {
+  console.log('[Server] Page component received params:', params);
   const { slug } = params;
-  const [post, setPost] = React.useState<any>(null);
-  const [loading, setLoading] = React.useState(true);
-  const [error, setError] = React.useState<string | null>(null);
 
-  React.useEffect(() => {
-    const fetchPost = async () => {
-      if (!client) {
-        setError('TinaCMS client not initialized. Please run the dev server.');
-        setLoading(false);
-        return;
-      }
+  const tinaProps = await fetchTinaData(slug);
 
-      try {
-        setLoading(true);
-        const tinaData = await client.queries.post({ relativePath: `${slug}.mdx` });
-        setPost(tinaData);
-        setError(null);
-      } catch (err) {
-        console.error('Error fetching post:', err);
-        setError('Failed to load the blog post. Please try again later.');
-      } finally {
-        setLoading(false);
-      }
-    };
+  if (!tinaProps) {
+    notFound(); // Trigger Next.js 404 page
+  }
 
-    fetchPost();
-  }, [slug]);
-
-  if (loading) {
-    return (
+  return (
+    // Suspense is less critical here now, but can be kept for client component loading states
+    <Suspense fallback={
       <div className="container mx-auto mt-24 px-4">
         <div className="flex justify-center py-20">
           <div className="h-10 w-10 animate-spin rounded-full border-b-2 border-t-2 border-primary"></div>
         </div>
       </div>
-    );
-  }
-
-  if (error || !post) {
-    return (
-      <div className="container mx-auto mt-24 px-4">
-        <div className="py-20 text-center">
-          <h1 className="text-2xl font-bold text-red-500">Error</h1>
-          <p className="mt-4">{error || 'Blog post not found'}</p>
-          <Link href="/blog" className="mt-6 inline-block text-primary hover:underline">
-            Return to Blog
-          </Link>
-        </div>
-      </div>
-    );
-  }
-
-  const { data } = useTina({
-    query: post.query,
-    variables: post.variables,
-    data: post.data,
-  });
-
-  const postData = data.post;
-  const formattedDate = format(new Date(postData.date), 'MMMM d, yyyy');
-
-  return (
-    <article className="container mx-auto mt-24 px-4">
-      <Link href="/blog" className="mb-6 mt-8 inline-block text-primary hover:underline">
-        ← Back to all posts
-      </Link>
-      
-      {/* Cover Image */}
-      <div className="relative mb-8 aspect-[16/9] w-full overflow-hidden rounded-xl">
-        <Image
-          src={postData.coverImage}
-          alt={postData.title}
-          fill
-          priority
-          className="object-cover"
-        />
-      </div>
-      
-      {/* Post Header */}
-      <div className="mb-8">
-        <h1 className="mb-4 text-4xl font-bold">{postData.title}</h1>
-        
-        <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-          <time dateTime={postData.date}>{formattedDate}</time>
-          
-          {postData.tags && postData.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2">
-              {postData.tags.map((tag: string) => (
-                <span 
-                  key={tag}
-                  className="rounded-full bg-secondary px-3 py-1 text-xs"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-      
-      {/* Post Content */}
-      <div className="prose prose-lg max-w-none dark:prose-invert">
-        <TinaMarkdown content={postData.body} />
-      </div>
-    </article>
+    }>
+      {/* Pass the server-fetched props to the client component */}
+      <BlogPostClient {...tinaProps} />
+    </Suspense>
   );
 }
 
-export async function generateStaticParams() {
-  // This function is called at build time to pre-render paths
-  if (!client) return [];
-  
-  try {
-    const postsConnection = await client.queries.postConnection();
-    return postsConnection.data.postConnection.edges?.map((edge: PostEdge) => ({
-      slug: edge?.node?._sys.filename,
-    })) || [];
-  } catch (error) {
-    console.error('Error generating static paths:', error);
-    return [];
-  }
-} 
+// Re-enable generateStaticParams if needed for SSG, ensuring it uses the same logic
+// export async function generateStaticParams() { ... } 

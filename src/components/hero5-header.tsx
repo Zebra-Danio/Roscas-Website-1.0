@@ -5,6 +5,7 @@ import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import React from 'react'
 import { cn } from '@/lib/utils'
+import { usePathname, useRouter } from 'next/navigation'
 
 const menuItems = [
     { name: 'Features', href: '#features' },
@@ -17,6 +18,8 @@ const menuItems = [
 export const HeroHeader = () => {
     const [menuState, setMenuState] = React.useState(false)
     const [isScrolled, setIsScrolled] = React.useState(false)
+    const pathname = usePathname()
+    const router = useRouter()
 
     React.useEffect(() => {
         const handleScroll = () => {
@@ -26,21 +29,30 @@ export const HeroHeader = () => {
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
-    const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-        if (href.startsWith('#')) {
-            e.preventDefault()
-            const targetId = href.substring(1)
-            const element = document.getElementById(targetId)
+    const smoothScrollToSection = (targetId: string) => {
+        const element = document.getElementById(targetId)
+        if (element) {
+            const topOffset = 100
+            const elementPosition = element.getBoundingClientRect().top + window.scrollY
+            const offsetPosition = elementPosition - topOffset
             
-            if (element) {
-                const topOffset = 100 // adjust this value to position the section a few lines from the top
-                const elementPosition = element.getBoundingClientRect().top + window.scrollY
-                const offsetPosition = elementPosition - topOffset
-                
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                })
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            })
+        }
+    }
+
+    const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+        setMenuState(false)
+        
+        if (href.startsWith('#')) {
+            const targetId = href.substring(1)
+            if (pathname === '/') {
+                e.preventDefault()
+                smoothScrollToSection(targetId)
+            } else {
+                router.push('/' + href)
             }
         }
     }
@@ -74,8 +86,8 @@ export const HeroHeader = () => {
                                 {menuItems.map((item, index) => (
                                     <li key={index}>
                                         <Link
-                                            href={item.href}
-                                            onClick={(e) => scrollToSection(e, item.href)}
+                                            href={item.href.startsWith('#') ? ('/' + item.href) : item.href}
+                                            onClick={(e) => handleNavClick(e, item.href)}
                                             className="text-muted-foreground hover:text-accent-foreground block duration-150">
                                             <span>{item.name}</span>
                                         </Link>
@@ -90,8 +102,8 @@ export const HeroHeader = () => {
                                     {menuItems.map((item, index) => (
                                         <li key={index}>
                                             <Link
-                                                href={item.href}
-                                                onClick={(e) => scrollToSection(e, item.href)}
+                                                href={item.href.startsWith('#') ? ('/' + item.href) : item.href}
+                                                onClick={(e) => handleNavClick(e, item.href)}
                                                 className="text-muted-foreground hover:text-accent-foreground block duration-150">
                                                 <span>{item.name}</span>
                                             </Link>

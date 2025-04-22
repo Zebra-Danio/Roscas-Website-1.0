@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { TinaCMSProvider } from "@/lib/tina";
+import { HeroHeader } from "@/components/hero5-header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +24,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <TinaCMSProvider>
-          {children}
+          <HeroHeader />
+          <main>{children}</main>
         </TinaCMSProvider>
       </body>
     </html>

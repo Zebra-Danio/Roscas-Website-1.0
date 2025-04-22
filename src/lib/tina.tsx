@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { TinaProvider } from 'tinacms';
 
 // This is a simplified provider for TinaCMS
 export function TinaCMSProvider({ children }: { children: React.ReactNode }) {

@@ -4,13 +4,26 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { format } from 'date-fns';
-import { cn } from '@/lib/utils';
 
 // This client will be generated after TinaCMS initialization
-let client: any;
+// We'll need to handle the case where it might not exist yet
+interface TinaClient {
+  queries: {
+    postConnection: () => Promise<any>;
+  }
+}
+
+let client: TinaClient | null = null;
 try {
-  client = require('../../../tina/__generated__/client').default;
-} catch (error) {
+  // Using dynamic import to avoid require
+  import('../../../tina/__generated__/client')
+    .then(module => {
+      client = module.default;
+    })
+    .catch(() => {
+      console.warn('Tina client not found. Make sure to run the dev server first.');
+    });
+} catch (err) {
   console.warn('Tina client not found. Make sure to run the dev server first.');
 }
 
@@ -83,11 +96,25 @@ export default function BlogPage() {
       }
     };
 
-    fetchPosts();
+    if (client) {
+      fetchPosts();
+    } else {
+      const timer = setTimeout(() => {
+        // Wait for dynamic import to complete
+        if (client) {
+          fetchPosts();
+        } else {
+          setError('TinaCMS client not initialized. Please run the dev server.');
+          setLoading(false);
+        }
+      }, 1000);
+      
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   return (
-    <div className="container mx-auto mt-24 px-4">
+    <div className="container mx-auto px-4 pt-24">
       <div className="mb-12 text-center">
         <h1 className="mb-4 text-5xl font-bold">Our Blog</h1>
         <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
