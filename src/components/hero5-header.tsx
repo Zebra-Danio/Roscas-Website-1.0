@@ -11,6 +11,7 @@ const menuItems = [
     { name: 'Community', href: '#community' },
     { name: 'About', href: '#about' },
     { name: 'FAQ', href: '#faq' },
+    { name: 'Blog', href: '/blog' }
 ]
 
 export const HeroHeader = () => {
