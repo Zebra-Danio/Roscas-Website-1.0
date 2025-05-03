@@ -15,33 +15,51 @@ export default function FAQsThree() {
     const faqItems: FAQItem[] = [
         {
             id: 'item-1',
-            icon: 'clock',
-            question: 'What are your business hours?',
-            answer: 'Our customer service team is available Monday through Friday from 9:00 AM to 8:00 PM EST, and weekends from 10:00 AM to 6:00 PM EST. During holidays, hours may vary and will be posted on our website.',
+            icon: 'tag',
+            question: 'Is RoscasApp really free to use?',
+            answer: 'Yes! The core features for managing your ROSCA group – setting up circles, inviting members, tracking contributions, managing schedules, and communicating within the app – are completely free for all members.',
         },
         {
             id: 'item-2',
-            icon: 'credit-card',
-            question: 'How do subscription payments work?',
-            answer: 'Subscription payments are automatically charged to your default payment method on the same day each month or year, depending on your billing cycle. You can update your payment information and view billing history in your account dashboard.',
+            icon: 'wallet',
+            question: 'Does RoscasApp handle the money transfers between members?',
+            answer: 'No. RoscasApp is a tool specifically designed for managing and tracking your savings circle contributions and payouts. You and your group members continue to exchange money directly using your preferred methods (e.g., cash, bank transfer, mobile money). The app simply provides a clear, shared record of these agreed transactions.',
         },
         {
             id: 'item-3',
-            icon: 'truck',
-            question: 'Can I expedite my shipping?',
-            answer: 'Yes, we offer several expedited shipping options at checkout. Next-day and 2-day shipping are available for most U.S. addresses if orders are placed before 2:00 PM EST. International expedited shipping options vary by destination.',
+            icon: 'alert-circle',
+            question: 'What happens if someone in my group misses a payment?',
+            answer: 'The Roscas App helps improve transparency by clearly tracking who has paid and sending automatic reminders to help prevent missed payments. However, the app does not guarantee payments or insure against defaults. Managing missed payments remains the responsibility of the group, based on the rules you agreed upon when forming your circle, just like in a traditional ROSCA.',
         },
         {
             id: 'item-4',
-            icon: 'globe',
-            question: 'Do you offer localized support?',
-            answer: 'We offer multilingual support in English, Spanish, French, German, and Japanese. Our support team can assist customers in these languages via email, chat, and phone during standard business hours for each respective region.',
+            icon: 'shield',
+            question: 'How secure is my groups data and information?',
+            answer: 'We prioritize your security and privacy. We use secure login methods provided by Privy.io and employ robust data protection measures to keep your groups information safe. Our background use of blockchain technology adds an extra layer of integrity and reliability to your records.',
         },
         {
             id: 'item-5',
-            icon: 'package',
-            question: 'How do I track my order?',
-            answer: 'Once your order ships, you&apos;ll receive a confirmation email with a tracking number. You can use this number on our website or the carrier&apos;s website to track your package. You can also view order status and tracking information in your account dashboard under "Order History".',
+            icon: 'sparkles',
+            question: 'What is the \'Tip\' feature? Is it required?',
+            answer: 'The \'Tip\' feature is completely optional. It\'s a tool that some groups might choose to activate if they want a flexible way for members to show appreciation or express interest in swapping payout slots using community-earned tokens within the app. Your group decides together if and how you want to use optional features like this, based on your own rules.',
+        },
+        {
+            id: 'item-6',
+            icon: 'users',
+            question: 'How do I add members to my savings circle?',
+            answer: 'Once an organizer creates a circle in the app, they can easily share a unique invitation link with potential members via WhatsApp, SMS, email, or any other messaging platform. Members simply click the link to join the group within the app.',
+        },
+        {
+            id: 'item-7',
+            icon: 'layers',
+            question: 'Can I be part of more than one ROSCA circle using the app?',
+            answer: 'Absolutely. You can create or be a member of multiple different ROSCA circles simultaneously within the RoscasApp, keeping all your group activities organised in one place.',
+        },
+        {
+            id: 'item-8',
+            icon: 'map-pin',
+            question: 'Is this app available outside the UK?',
+            answer: 'Currently, our pilot launch (starting [Approximate Launch Date/Quarter]) is focused specifically on serving Filipino and Nigerian diaspora communities within the United Kingdom. We plan to explore expansion to other regions in the future based on feedback and local requirements.',
         },
     ]
 
@@ -53,11 +71,11 @@ export default function FAQsThree() {
                         <div className="sticky top-20">
                             <h2 className="mt-4 text-3xl font-bold">Frequently Asked Questions</h2>
                             <p className="text-muted-foreground mt-4">
-                                Can&apos;t find what you&apos;re looking for? Contact our{' '}
+                                Can&apos;t find what you&apos;re looking for? Contact {' '}
                                 <Link
                                     href="#"
                                     className="text-primary font-medium hover:underline">
-                                    customer support team
+                                    our team
                                 </Link>
                             </p>
                         </div>
