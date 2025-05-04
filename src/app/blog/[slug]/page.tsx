@@ -58,10 +58,15 @@ async function fetchTinaData(slug: string): Promise<TinaDataProps | null> {
 }
 
 export default async function BlogPostPage({ params }: PostPageProps) {
-  console.log('[Server] Page component received params:', params);
-  const { slug } = params;
+  // Explicitly await params resolution before destructuring (though Next.js often handles this implicitly in function calls)
+  // const resolvedParams = await params; 
+  // const { slug } = resolvedParams; // This is overly verbose and usually not needed
 
-  const tinaProps = await fetchTinaData(slug);
+  // Directly access params.slug when calling the async function
+  console.log('[Server] Page component received params:', params);
+  const slug = params.slug; // Access slug directly
+  
+  const tinaProps = await fetchTinaData(slug); // Pass the slug to the async fetch function
 
   if (!tinaProps) {
     notFound(); // Trigger Next.js 404 page

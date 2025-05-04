@@ -64,7 +64,7 @@ export default function FAQsThree() {
     ]
 
     return (
-        <section id="faq" className="bg-muted dark:bg-background py-20">
+        <section id="faq" className="bg-muted dark:bg-background py-12">
             <div className="mx-auto max-w-5xl px-4 md:px-6">
                 <div className="flex flex-col gap-10 md:flex-row md:gap-16">
                     <div className="md:w-1/3">

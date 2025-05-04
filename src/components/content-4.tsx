@@ -7,7 +7,7 @@ export default function ContentSection() {
         <section id="community" className="py-16 md:py-32">
             <div className="mx-auto max-w-5xl px-6">
                 <div className="grid gap-6 md:grid-cols-2 md:gap-12">
-                    <h2 className="text-4xl font-medium">Trust, Transparency, and Community at Our Core</h2>
+                    <h2 className="text-4xl font-medium lg:text-5xl">Trust, Transparency, and Community at Our Core</h2>
                     <div className="space-y-6">
                         <p>We believe deeply in the power of community savings. RoscasApp isn't trying to replace the vital connections of your Paluwagan, Ajo, or Esusu; we're here to support and strengthen them with technology designed around your needs. We provide simple tools to manage your circle smoothly, so you can focus on the trust and shared goals that truly matter.</p>
                         <p>
@@ -18,7 +18,7 @@ export default function ContentSection() {
                             variant="secondary"
                             size="sm"
                             className="gap-1 pr-1.5">
-                            <Link href="#">
+                            <Link href="/blog">
                                 <span>Learn More About Our Community Focus</span>
                                 <ChevronRight className="size-2" />
                             </Link>

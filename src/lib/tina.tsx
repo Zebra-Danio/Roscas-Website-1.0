@@ -18,7 +18,7 @@ function EditButton() {
       <button
         className="rounded-full bg-primary p-3 text-white shadow-lg hover:bg-primary/80"
         onClick={() => {
-          window.location.href = '/admin';
+          window.location.href = '/admin/index.html';
         }}
       >
         <svg

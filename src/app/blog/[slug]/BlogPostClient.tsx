@@ -51,6 +51,9 @@ const BlogPostClient = (props: TinaData) => {
 
   const postData = data.post;
 
+  // Log the body content being passed to TinaMarkdown
+  console.log('[Client] postData.body:', postData.body);
+
   // Format date after we're sure postData exists
   const formattedDate = format(new Date(postData.date), 'MMMM d, yyyy');
 
@@ -95,7 +98,7 @@ const BlogPostClient = (props: TinaData) => {
       </div>
       
       {/* Post Content */}
-      <div className="prose prose-lg max-w-none dark:prose-invert">
+      <div className="prose prose-lg mx-auto max-w-prose dark:prose-invert">
         <TinaMarkdown content={postData.body} />
       </div>
     </article>

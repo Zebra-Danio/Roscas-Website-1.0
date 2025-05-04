@@ -120,3 +120,62 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Add explicit styles for prose elements to ensure rendering */
+@layer components {
+  .prose ul,
+  .prose ol {
+    @apply list-inside pl-5 my-4;
+  }
+  .prose ul {
+    @apply list-disc;
+  }
+  .prose ol {
+    @apply list-decimal;
+  }
+  .prose li {
+    @apply mb-2;
+  }
+  .prose p {
+    @apply my-4;
+  }
+  .prose strong,
+  .prose b {
+    @apply font-bold;
+  }
+  .prose em,
+  .prose i {
+    @apply italic;
+  }
+  .prose h1 {
+    @apply text-4xl font-bold my-6;
+  }
+  .prose h2 {
+    @apply text-3xl font-bold my-5;
+  }
+  .prose h3 {
+    @apply text-2xl font-bold my-4;
+  }
+  .prose h4 {
+    @apply text-xl font-bold my-3;
+  }
+  .prose h5 {
+    @apply text-lg font-semibold my-2;
+  }
+  .prose h6 {
+    @apply text-base font-semibold my-2;
+  }
+  .prose table {
+    @apply table-auto border-collapse border border-slate-500 my-4;
+  }
+  .prose th,
+  .prose td {
+    @apply border border-slate-600 p-2;
+  }
+  .prose th {
+    @apply bg-slate-100 dark:bg-slate-700 font-semibold;
+  }
+  .prose a {
+    @apply text-primary hover:underline;
+  }
+}

@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 export default function ContentSection() {
     return (
-        <section id="about" className="py-16 md:py-32">
+        <section id="about" className="py-10 md:py-20">
             <div className="mx-auto max-w-5xl space-y-8 px-6 md:space-y-16">
                 <h2 className="relative z-10 max-w-xl text-4xl font-medium lg:text-5xl">About Roscas: Empowering Communities</h2>
                 <div className="grid gap-6 sm:grid-cols-2 md:gap-12 lg:gap-24">
