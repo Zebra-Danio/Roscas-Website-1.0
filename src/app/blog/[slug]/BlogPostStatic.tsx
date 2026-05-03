@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import type { TinaMarkdownContent } from 'tinacms/dist/rich-text';
+import BlogCTA from '@/components/blog-cta';
 
 // Matches the TinaClientData interface from page.tsx
 interface StaticPostData {
@@ -80,8 +81,11 @@ const BlogPostStatic = ({ data }: BlogPostStaticProps) => {
       </div>
       
       <div className="prose prose-lg mx-auto max-w-prose dark:prose-invert">
-        {/* In production, always use ReactMarkdown */}
         <ReactMarkdown>{typeof postData.body === 'string' ? postData.body : ''}</ReactMarkdown>
+      </div>
+
+      <div className="mx-auto max-w-prose">
+        <BlogCTA />
       </div>
     </article>
   );

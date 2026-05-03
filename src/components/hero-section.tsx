@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import { ArrowRight, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
+import { Button } from '@/components/ui/button'
 import { TextEffect } from '@/components/ui/text-effect'
 import { AnimatedGroup } from '@/components/ui/animated-group'
 
@@ -124,24 +125,16 @@ export default function HeroSection() {
                                         },
                                         item: transitionVariants.item
                                     }}
-                                    className="mt-12 flex flex-col items-center justify-center gap-4 md:flex-row">
-                                    <Link href="#link" key="apple-badge">
-                                        <Image
-                                            src="/images/applebutton.svg"
-                                            alt="Download on the App Store"
-                                            width={135}
-                                            height={40}
-                                            className="h-10 w-auto md:h-12"
-                                        />
-                                    </Link>
-                                    <Link href="#link" key="google-badge">
-                                        <Image
-                                            src="/images/goodlebutton.svg"
-                                            alt="Get it on Google Play"
-                                            width={135}
-                                            height={40}
-                                            className="h-10 w-auto md:h-12"
-                                        />
+                                    className="mt-12 flex flex-col items-center justify-center gap-4">
+                                    <Button asChild size="lg" className="px-6">
+                                        <Link href="/get-started">
+                                            <span>Get Started — Try the app free</span>
+                                        </Link>
+                                    </Button>
+                                    <Link
+                                        href="/community-liaison"
+                                        className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
+                                        Become a Community Ambassador
                                     </Link>
                                 </AnimatedGroup>
                             </div>
@@ -209,27 +202,9 @@ export default function HeroSection() {
                             <div className="flex">
                                 <img
                                     className="mx-auto h-4 w-fit dark:invert"
-                                    src="/images/privy.svg"
-                                    alt="Privy Logo"
-                                    height="16"
-                                    width="auto"
-                                />
-                            </div>
-                            <div className="flex">
-                                <img
-                                    className="mx-auto h-4 w-fit dark:invert"
                                     src="/images/firebase.svg"
                                     alt="Firebase Logo"
                                     height="16"
-                                    width="auto"
-                                />
-                            </div>
-                            <div className="flex">
-                                <img
-                                    className="mx-auto h-5 w-fit dark:invert"
-                                    src="/images/sui.svg"
-                                    alt="Sui Logo"
-                                    height="20"
                                     width="auto"
                                 />
                             </div>
