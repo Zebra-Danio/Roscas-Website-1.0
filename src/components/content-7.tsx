@@ -11,7 +11,7 @@ export default function ContentSection() {
                         <p className="text-muted-foreground">
                         Roscas was born from a deep <span className="text-accent-foreground font-bold">respect</span> for the power and resilience of traditional community savings practices like Paluwagan, Ajo, and Esusu. We saw the incredible value these circles bring but also the administrative challenges organizers and members often face with manual tracking, transparency, and managing payouts.  
                         </p>
-                        <p className="text-muted-foreground">Our mission is simple: To provide a secure, user-friendly, and always-free digital tool that enhances these trusted systems without changing their core community spirit. We're passionate about leveraging technology thoughtfully for financial inclusion and community empowerment globally.</p>
+                        <p className="text-muted-foreground">Our mission is simple: To provide a secure, user-friendly, and always-free digital tool that enhances these trusted systems without changing their core community spirit. We&apos;re passionate about leveraging technology thoughtfully for financial inclusion and community empowerment globally.</p>
 
                         <div className="grid grid-cols-2 gap-3 pt-6 sm:gap-4">
                             <div className="space-y-3">
@@ -26,7 +26,7 @@ export default function ContentSection() {
                                     <PiggyBank className="size-4" />
                                     <h3 className="text-sm font-medium">Accessible & Free:</h3>
                                 </div>
-                                <p className="text-muted-foreground text-sm">Committed to providing an intuitive tool that's always free for core ROSCA management, ensuring everyone can benefit.</p>
+                                <p className="text-muted-foreground text-sm">Committed to providing an intuitive tool that&apos;s always free for core ROSCA management, ensuring everyone can benefit.</p>
                             </div>
                         </div>
                     </div>

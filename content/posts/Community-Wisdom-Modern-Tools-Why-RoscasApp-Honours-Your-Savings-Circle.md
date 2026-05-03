@@ -1,10 +1,22 @@
 ---
 title: 'Community Wisdom, Modern Tools: Why RoscasApp Honours Your Savings Circle'
 date: 2025-05-02T23:00:00.000Z
+tags:
+  - Savings Circle
+  - Trust
+  - FinTech
+  - Community Empowerment
+  - Financial Inclusion
+  - Esusu
+  - Ajo
+  - Paluwagan
+  - ROSCA
+  - Community Savings
+  - RoscasApp
 coverImage: /images/posts/communityPegs.jpg
 ---
 
-Walk down a street in Manila, Lagos, Nairobi, Mexico City, or even right here in London or Southend-on-Sea, and you'll find communities thriving thanks to a financial tradition as old as time, yet perfectly suited for today. Known globally by countless names – Paluwagan in the Philippines, Ajo or Esusu in Nigeria and Ghana, Chama in Kenya, Tanda in Mexico, Chit Funds in India, Kye in Korea, Njanggi in Cameroon – these community savings circles are a testament to collective strength and ingenuity.
+Walk down a street in Manila, Lagos, Nairobi, Mexico City, or even right here in London  and you'll find communities thriving thanks to a financial tradition as old as time, yet perfectly suited for today. Known globally by countless names – Paluwagan in the Philippines, Ajo or Esusu in Nigeria and Ghana, Chama in Kenya, Tanda in Mexico, Chit Funds in India, Kye in Korea, Njanggi in Cameroon – these community savings circles are a testament to collective strength and ingenuity.
 
 At their heart, these groups, often called Rotating Savings and Credit Associations (ROSCAs) by academics, share a simple, powerful idea: a group of trusted individuals contribute a fixed amount regularly, and the collected 'pot' rotates among members until everyone has received it once. It’s a system built on mutual trust, shared goals, and community bonds, with roots stretching back centuries, perhaps even millennia, across Africa, Asia, and Latin America.
 
@@ -55,6 +67,6 @@ We are passionate about building this tool with the community.
 
 Learn More: Explore our website to see features in detail.
 
-Become a Beta Tester: We're looking for early users, especially those currently in community savings circles, to provide feedback and help shape the app. Visit our [Contact](/contact) page to express your interest!
+Become a Beta Tester: We're looking for early users, especially those currently in community savings circles, to provide feedback and help shape the app. Visit our **[Contact](/contact)** page to express your interest!
 
 Stay Tuned: Follow us on Social Media  for updates as we approach our launch!

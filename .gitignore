@@ -42,3 +42,11 @@ next-env.d.ts
 
 node_modules
 .env
+.env.local
+
+# firebase
+.firebase/
+
+# logs
+*.log
+pglite-debug.log

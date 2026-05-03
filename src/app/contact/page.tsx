@@ -1,19 +1,24 @@
-'use client' // Assuming the header or other elements might need client-side hooks
-
-import { HeroHeader } from '@/components/hero5-header' // Reuse the existing header
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Mail } from 'lucide-react'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+    title: 'Contact Us – Join the Roscas Beta Program',
+    description:
+        'Get in touch with the Roscas team. Join our beta programme for early access to the free community savings circle app. We welcome feedback from Paluwagan, Ajo, Esusu, and Chama groups.',
+    openGraph: {
+        title: 'Contact Us – Join the Roscas Beta Program',
+        description:
+            'Interested in shaping the future of community savings? Contact us to join the Roscas beta programme and get early access.',
+    },
+}
 
 export default function ContactPage() {
     return (
         <>
-            {/* Reusing the existing header */}
-            <HeroHeader />
-
-            {/* Main contact section */}
-            <section className="py-12 md:py-20"> {/* Consistent padding */}
+            <section className="py-12 md:py-20">
                 <div className="mx-auto max-w-3xl px-6 text-center space-y-8"> {/* Centered content */}
 
                     {/* Title */}
@@ -23,11 +28,11 @@ export default function ContactPage() {
 
                     {/* Introductory Text */}
                     <p className="text-lg text-muted-foreground">
-                        We'd love to hear from you! Whether you have questions about <strong>RoscasApp</strong>, ideas to share, feedback on our approach, or are interested in potential partnerships, please don't hesitate to reach out. We're building <strong>RoscasApp for the community</strong>, and your input is incredibly valuable to us.
+                        We&apos;d love to hear from you! Whether you have questions about <strong>RoscasApp</strong>, ideas to share, feedback on our approach, or are interested in potential partnerships, please don&apos;t hesitate to reach out. We&apos;re building <strong>RoscasApp for the community</strong>, and your input is incredibly valuable to us.
                     </p>
                     
                     <p className="text-lg text-muted-foreground">
-                        We are preparing for the <strong>initial launch</strong> of RoscasApp and are looking for <strong>enthusiastic early users</strong>! If you currently participate in any form of community savings circle (like Paluwagan, Ajo, Esusu, Chama, Tanda, Committee, or similar groups) and are interested in becoming a <strong>beta tester</strong> – getting exclusive early access and helping shape the app's future with your feedback – please send us a message using the button below.
+                        We are preparing for the <strong>initial launch</strong> of RoscasApp and are looking for <strong>enthusiastic early users</strong>! If you currently participate in any form of community savings circle (like Paluwagan, Ajo, Esusu, Chama, Tanda, Committee, or similar groups) and are interested in becoming a <strong>beta tester</strong> – getting exclusive early access and helping shape the app&apos;s future with your feedback – please send us a message using the button below.
                     </p>
                     
                     <p className="text-lg text-muted-foreground">

@@ -9,7 +9,7 @@ export default function ContentSection() {
                 <div className="grid gap-6 md:grid-cols-2 md:gap-12">
                     <h2 className="text-4xl font-medium lg:text-5xl">Trust, Transparency, and Community at Our Core</h2>
                     <div className="space-y-6">
-                        <p>We believe deeply in the power of community savings. RoscasApp isn't trying to replace the vital connections of your Paluwagan, Ajo, or Esusu; we're here to support and strengthen them with technology designed around your needs. We provide simple tools to manage your circle smoothly, so you can focus on the trust and shared goals that truly matter.</p>
+                        <p>We believe deeply in the power of community savings. RoscasApp isn&apos;t trying to replace the vital connections of your Paluwagan, Ajo, or Esusu; we&apos;re here to support and strengthen them with technology designed around your needs. We provide simple tools to manage your circle smoothly, so you can focus on the trust and shared goals that truly matter.</p>
                         <p>
                         Built on the principle that value should <span className="font-bold">circulate within the community,</span> the Roscas App helps keep your hard-earned money local. We prioritize your trust and security, offering a reliable platform for record-keeping and communication, while you continue to manage your funds directly within your group.
                         </p>

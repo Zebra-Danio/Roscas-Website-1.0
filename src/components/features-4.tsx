@@ -38,7 +38,7 @@ export default function Features() {
 
                             <h3 className="text-sm font-medium">Clear Payout Scheduling</h3>
                         </div>
-                        <p className="text-sm">Easily view the upcoming payout schedule so everyone knows when it's their turn. Organisers can digitally confirm when payouts have been made.</p>
+                        <p className="text-sm">Easily view the upcoming payout schedule so everyone knows when it&apos;s their turn. Organisers can digitally confirm when payouts have been made.</p>
                     </div>
                     <div className="space-y-2">
                         <div className="flex items-center gap-2">
@@ -46,7 +46,7 @@ export default function Features() {
 
                             <h3 className="text-sm font-medium">Secure & Reliable Records</h3>
                         </div>
-                        <p className="text-sm">Your group's information and transaction history are kept secure with modern login protection and reliable record-keeping. We use blockchain technology subtly in the background to enhance data integrity and peace of mind.</p>
+                        <p className="text-sm">Your group&apos;s information and transaction history are kept secure with modern login protection and reliable record-keeping. We use blockchain technology subtly in the background to enhance data integrity and peace of mind.</p>
                     </div>
                     <div className="space-y-2">
                         <div className="flex items-center gap-2">
@@ -54,6 +54,7 @@ export default function Features() {
 
                             <h3 className="text-sm font-medium">Optional 'Tip' Flexibility</h3>
                         </div>
+                        {/* eslint-disable-next-line react/no-unescaped-entities */}
                         <p className="text-sm">For groups that want extra flexibility, our unique optional 'Tip' feature allows members to show appreciation or express interest in earlier payout slots using community-earned tokens.</p>
                     </div>
                 </div>

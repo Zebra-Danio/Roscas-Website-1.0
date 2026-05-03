@@ -7,11 +7,63 @@ import { HeroHeader } from "@/components/hero5-header";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Roscas - Modern Solutions for Customer Engagement",
-  description: "Highly customizable components for building modern websites and applications that look and feel the way you mean it.",
+  metadataBase: new URL("https://roscas.io"),
+  title: {
+    default: "Roscas – Free App for Managing Your Savings Circle",
+    template: "%s | Roscas",
+  },
+  description:
+    "Manage your Paluwagan, Ajo, Esusu, or Chama savings circle with the free Roscas app. Track contributions, schedule payouts, and send reminders – all in one secure place.",
+  keywords: [
+    "savings circle app",
+    "ROSCA app",
+    "Paluwagan app",
+    "Ajo savings",
+    "Esusu app",
+    "Chama app",
+    "Tanda savings",
+    "community savings",
+    "rotating savings and credit association",
+    "savings group management",
+    "free savings app",
+    "financial inclusion",
+    "diaspora savings UK",
+    "contribution tracking",
+  ],
+  authors: [{ name: "Roscas", url: "https://roscas.io" }],
+  creator: "Roscas",
+  openGraph: {
+    type: "website",
+    locale: "en_GB",
+    url: "https://roscas.io",
+    siteName: "Roscas",
+    title: "Roscas – Free App for Managing Your Savings Circle",
+    description:
+      "Manage your Paluwagan, Ajo, Esusu, or Chama savings circle with the free Roscas app. Track contributions, schedule payouts, and send reminders.",
+    images: [
+      {
+        url: "/images/peeps.jpg",
+        width: 2700,
+        height: 1440,
+        alt: "Roscas – Community Savings Circle App",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Roscas – Free App for Managing Your Savings Circle",
+    description:
+      "Manage your Paluwagan, Ajo, Esusu, or Chama savings circle with the free Roscas app. Track contributions, schedule payouts, and send reminders.",
+    images: ["/images/peeps.jpg"],
+    creator: "@RoscasTeam",
+  },
   icons: {
     icon: "/favicon.ico",
     apple: "/favicon.ico",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 

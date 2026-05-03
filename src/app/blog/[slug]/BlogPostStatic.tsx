@@ -1,35 +1,45 @@
-'use client';
-
 import React from 'react';
 import Image from 'next/image';
 import { format } from 'date-fns';
 import Link from 'next/link';
-import { useTina } from 'tinacms/dist/react';
-import { TinaMarkdown, TinaMarkdownContent } from 'tinacms/dist/rich-text';
+import ReactMarkdown from 'react-markdown';
+import type { TinaMarkdownContent } from 'tinacms/dist/rich-text';
 
-// Interface for the props this component receives from the server component
-interface TinaDataProps {
-  data: any; // useTina handles the exact shape
-  variables: { relativePath: string };
-  query: string;
+// Matches the TinaClientData interface from page.tsx
+interface StaticPostData {
+  post: {
+    title: string;
+    date: string;
+    tags: string[];
+    coverImage: string;
+    body: TinaMarkdownContent | string; // Will be string in production
+    _sys: { filename: string };
+    id?: string;
+    [key: string]: any;
+  };
 }
 
-const BlogPostClient = (props: TinaDataProps) => {
-  // In development, always use useTina to enable live editing
-  const { data } = useTina(props);
+interface BlogPostStaticProps {
+  data: StaticPostData;
+  // query and variables are not needed for static rendering
+}
 
-  // Data structure comes from useTina hook
-  const postData = data?.post;
-
-  if (!postData) {
-    // Basic loading/error state if needed, though useTina might handle this
+const BlogPostStatic = ({ data }: BlogPostStaticProps) => {
+  if (!data?.post) {
     return (
       <div className="container mx-auto mt-24 px-4">
-        <div className="py-20 text-center">Loading or post not found...</div>
+        <div className="py-20 text-center">
+          <h1 className="text-2xl font-bold text-red-500">Error</h1>
+          <p className="mt-4">Blog post data is not available.</p>
+          <Link href="/blog" className="mt-6 inline-block text-primary hover:underline">
+            Return to Blog
+          </Link>
+        </div>
       </div>
     );
   }
 
+  const postData = data.post;
   const formattedDate = format(new Date(postData.date), 'MMMM d, yyyy');
 
   return (
@@ -56,7 +66,7 @@ const BlogPostClient = (props: TinaDataProps) => {
           
           {postData.tags && postData.tags.length > 0 && (
             <div className="flex flex-wrap gap-2">
-              {postData.tags.filter((tag: string | null | undefined): tag is string => !!tag).map((tag: string) => (
+              {postData.tags.filter((tag): tag is string => !!tag).map((tag: string) => (
                 <span 
                   key={tag}
                   className="rounded-full bg-secondary px-3 py-1 text-xs"
@@ -70,11 +80,11 @@ const BlogPostClient = (props: TinaDataProps) => {
       </div>
       
       <div className="prose prose-lg mx-auto max-w-prose dark:prose-invert">
-        {/* In development, always use TinaMarkdown */}
-        <TinaMarkdown content={postData.body as TinaMarkdownContent} />
+        {/* In production, always use ReactMarkdown */}
+        <ReactMarkdown>{typeof postData.body === 'string' ? postData.body : ''}</ReactMarkdown>
       </div>
     </article>
   );
 };
 
-export default BlogPostClient; 
+export default BlogPostStatic; 

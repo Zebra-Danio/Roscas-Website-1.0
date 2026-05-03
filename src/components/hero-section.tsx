@@ -210,7 +210,7 @@ export default function HeroSection() {
                                 <img
                                     className="mx-auto h-4 w-fit dark:invert"
                                     src="/images/privy.svg"
-                                    alt="/images/roscas-logo2.svg"
+                                    alt="Privy Logo"
                                     height="16"
                                     width="auto"
                                 />
@@ -219,7 +219,7 @@ export default function HeroSection() {
                                 <img
                                     className="mx-auto h-4 w-fit dark:invert"
                                     src="/images/firebase.svg"
-                                    alt="/images/roscas-logo2.svg"
+                                    alt="Firebase Logo"
                                     height="16"
                                     width="auto"
                                 />
@@ -228,7 +228,7 @@ export default function HeroSection() {
                                 <img
                                     className="mx-auto h-5 w-fit dark:invert"
                                     src="/images/sui.svg"
-                                    alt="/images/roscas-logo2.svg"
+                                    alt="Sui Logo"
                                     height="20"
                                     width="auto"
                                 />
@@ -237,7 +237,7 @@ export default function HeroSection() {
                                 <img
                                     className="mx-auto h-5 w-fit dark:invert"
                                     src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                                    alt="/images/roscas-logo2.svg"
+                                    alt="Placeholder Logo 1"
                                     height="20"
                                     width="auto"
                                 />
@@ -246,7 +246,7 @@ export default function HeroSection() {
                                 <img
                                     className="mx-auto h-4 w-fit dark:invert"
                                     src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                                    alt="/images/roscas-logo2.svg"
+                                    alt="Placeholder Logo 2"
                                     height="16"
                                     width="auto"
                                 />

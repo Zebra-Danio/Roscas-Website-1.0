@@ -4,10 +4,13 @@ import React from 'react';
 
 // This is a simplified provider for TinaCMS
 export function TinaCMSProvider({ children }: { children: React.ReactNode }) {
+  // Only show the custom edit button during development
+  const showEditButton = process.env.NODE_ENV !== 'production';
+
   return (
     <>
       {children}
-      <EditButton />
+      {showEditButton && <EditButton />}
     </>
   );
 }

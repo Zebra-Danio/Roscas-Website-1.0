@@ -5,25 +5,38 @@ const branch =
   process.env.GITHUB_BRANCH ||
   process.env.VERCEL_GIT_COMMIT_REF ||
   process.env.HEAD ||
-  "main";
+  "main"; // Ensure this aligns with your Tina Cloud project's target branch
+
+// ===========================================================================
+// CRITICAL ARCHITECTURE DECISION:
+// - TinaCMS is used ONLY during local development
+// - We deploy a static site without TinaCMS to Firebase
+// - Content is edited locally and stored in markdown files
+// ===========================================================================
 
 export default defineConfig({
   branch,
 
-  // Get this from tina.io
-  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
-  // Get this from tina.io
-  token: process.env.TINA_TOKEN,
+  // Get this from tina.io - This will be read from .env.local
+  // clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID, // Reverted for local setup
+  // Get this from tina.io - This will be read from .env.local
+  // token: process.env.TINA_TOKEN, // Reverted for local setup
 
   build: {
-    outputFolder: "admin",
+    outputFolder: "admin", // For local dev admin UI
     publicFolder: "public",
   },
   media: {
+    // This tells Tina Cloud how to structure media paths in your Git repo
+    // For local setup, this primarily defines where Tina looks for media.
     tina: {
-      mediaRoot: "images/posts",
-      publicFolder: "public",
+      mediaRoot: "images/posts", // Relative to publicFolder
+      publicFolder: "public",    // Base for media
     },
+  },
+  // TinaCMS admin configuration
+  admin: {
+    // This section can be used for local admin UI tweaks if needed in future
   },
   // Blog content schema
   schema: {
@@ -31,7 +44,7 @@ export default defineConfig({
       {
         name: "post",
         label: "Blog Posts",
-        path: "content/posts",
+        path: "content/posts", // Tina Cloud will commit to this path
         fields: [
           {
             type: "string",

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 
+    =============================================================================
+    CRITICAL COMPONENT: TinaCMS Admin Redirect
+    
+    Purpose:
+    - Provides a consistent way to access the TinaCMS admin interface
+    - Handles redirection to the TinaCMS admin server (port 4001)
+    
+    Why This Exists:
+    - TinaCMS admin runs on port 4001, not on the Next.js server (port 3000)
+    - This provides a simple way to access admin from the main site URL
+    
+    Usage:
+    - Visit http://localhost:3000/admin-redirect.html to access TinaCMS admin
+    =============================================================================
+    -->
+    <title>TinaCMS Admin</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #0077CC;
+        }
+        .button {
+            display: inline-block;
+            background-color: #0077CC;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        // Redirect directly to TinaCMS admin
+        window.onload = function() {
+            // Redirect to local Tina server on 4001, using /admin/ path
+            window.location.href = "http://localhost:4001/admin/";
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>TinaCMS Admin</h1>
+        <p>Redirecting to TinaCMS admin...</p>
+        <p>If you are not redirected automatically, click the button below:</p>
+        <a class="button" href="http://localhost:4001/admin/">Go to TinaCMS Admin</a>
+    </div>
+</body>
+</html> 
