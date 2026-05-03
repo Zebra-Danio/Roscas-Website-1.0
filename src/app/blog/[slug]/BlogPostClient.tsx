@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import Link from 'next/link';
 import { useTina } from 'tinacms/dist/react';
 import { TinaMarkdown, TinaMarkdownContent } from 'tinacms/dist/rich-text';
+import BlogCTA from '@/components/blog-cta';
 
 // Interface for the props this component receives from the server component
 interface TinaDataProps {
@@ -70,8 +71,11 @@ const BlogPostClient = (props: TinaDataProps) => {
       </div>
       
       <div className="prose prose-lg mx-auto max-w-prose dark:prose-invert">
-        {/* In development, always use TinaMarkdown */}
         <TinaMarkdown content={postData.body as TinaMarkdownContent} />
+      </div>
+
+      <div className="mx-auto max-w-prose">
+        <BlogCTA />
       </div>
     </article>
   );

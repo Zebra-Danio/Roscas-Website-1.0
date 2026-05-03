@@ -34,14 +34,14 @@ export default function FAQsThree() {
         {
             id: 'item-4',
             icon: 'shield',
-            question: 'How secure is my groups data and information?',
-            answer: 'We prioritize your security and privacy. We use secure login methods provided by Privy.io and employ robust data protection measures to keep your groups information safe. Our background use of blockchain technology adds an extra layer of integrity and reliability to your records.',
+            question: 'How secure is my group\'s data and information?',
+            answer: 'We prioritise your security and privacy. We use secure, modern login methods and robust data protection to keep your group\'s information safe. Records are kept tamper-resistant, so you can be confident your group\'s contribution and payout history is accurate and reliable.',
         },
         {
             id: 'item-5',
-            icon: 'sparkles',
-            question: 'What is the \'Tip\' feature? Is it required?',
-            answer: 'The \'Tip\' feature is completely optional. It\'s a tool that some groups might choose to activate if they want a flexible way for members to show appreciation or express interest in swapping payout slots using community-earned tokens within the app. Your group decides together if and how you want to use optional features like this, based on your own rules.',
+            icon: 'settings-2',
+            question: 'Can my group set its own rules and contribution amounts?',
+            answer: 'Absolutely. Every circle decides its own contribution amount, payment frequency, payout order, and any rules around late payments or member changes. RoscasApp simply helps you record and track what your group has agreed — your traditions, your rules.',
         },
         {
             id: 'item-6',

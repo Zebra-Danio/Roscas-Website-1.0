@@ -1,3 +1,4 @@
+import AmbassadorCTA from "@/components/ambassador-cta";
 import ContentSection from "@/components/content-4";
 import ContentSection2 from "@/components/content-7";
 import FAQsThree from "@/components/faqs-3";
@@ -11,8 +12,9 @@ export default function Home() {
       <div>
       <HeroSection />
       <Features />
-      <ContentSection />  
+      <ContentSection />
       <ContentSection2 />
+      <AmbassadorCTA />
       <FAQsThree />
       <FooterSection />
       </div>

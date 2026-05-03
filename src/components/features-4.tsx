@@ -1,4 +1,4 @@
-import { UsersRound, CircleDollarSign, BellRing, Calendar, ShieldCheck, Gift } from 'lucide-react'
+import { UsersRound, CircleDollarSign, BellRing, Calendar, ShieldCheck, Layers } from 'lucide-react'
 
 export default function Features() {
     return (
@@ -46,16 +46,15 @@ export default function Features() {
 
                             <h3 className="text-sm font-medium">Secure & Reliable Records</h3>
                         </div>
-                        <p className="text-sm">Your group&apos;s information and transaction history are kept secure with modern login protection and reliable record-keeping. We use blockchain technology subtly in the background to enhance data integrity and peace of mind.</p>
+                        <p className="text-sm">Your group&apos;s information and transaction history are kept safe with modern login protection and tamper-resistant record-keeping, so every member can trust the history of their circle.</p>
                     </div>
                     <div className="space-y-2">
                         <div className="flex items-center gap-2">
-                            <Gift className="size-4" />
+                            <Layers className="size-4" />
 
-                            <h3 className="text-sm font-medium">Optional 'Tip' Flexibility</h3>
+                            <h3 className="text-sm font-medium">Manage Multiple Circles</h3>
                         </div>
-                        {/* eslint-disable-next-line react/no-unescaped-entities */}
-                        <p className="text-sm">For groups that want extra flexibility, our unique optional 'Tip' feature allows members to show appreciation or express interest in earlier payout slots using community-earned tokens.</p>
+                        <p className="text-sm">Belong to more than one savings group? Run separate circles for family, friends, or work — all neatly organised in one app, with each group&apos;s rules and history kept clearly apart.</p>
                     </div>
                 </div>
             </div>

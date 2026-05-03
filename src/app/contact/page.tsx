@@ -1,8 +1,7 @@
-import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Mail } from 'lucide-react'
 import type { Metadata } from 'next'
+import ContactForm from './ContactForm'
 
 export const metadata: Metadata = {
     title: 'Contact Us – Join the Roscas Beta Program',
@@ -36,39 +35,37 @@ export default function ContactPage() {
                     </p>
                     
                     <p className="text-lg text-muted-foreground">
-                        Your insights will be crucial in making RoscasApp the best possible tool for communities like yours. As a small thank you for your valuable time and insights, selected active beta testers may receive a <strong>token of our appreciation</strong>.
+                        Your insights will be crucial in making RoscasApp the best possible tool for communities like yours. As a small thank you for your valuable time and insights, selected active beta testers may receive a <strong>gift of our appreciation</strong>.
                     </p>
 
-                    {/* Image Placeholder */}
                     <div className="relative aspect-video w-full max-w-xl mx-auto overflow-hidden rounded-2xl border shadow-lg">
-                        {/* You'll need to replace this src with your desired image path */}
                         <Image
-                            src="/images/reach.jpg" // Placeholder - CHANGE THIS
-                            alt="Contact illustration or photo"
-                            fill // Use fill to cover the container
+                            src="/images/reach.jpg"
+                            alt="Contact illustration"
+                            fill
                             className="object-cover"
                         />
                     </div>
 
-                    {/* Mailto Button */}
-                    <div className="pt-6">
-                        <Button asChild size="lg" className="gap-2">
-                            <a href="mailto:team@roscas.io">
-                                <Mail className="size-4" />
-                                Send us an Email
+                    <div className="mx-auto max-w-xl pt-6">
+                        <div className="rounded-2xl border bg-background p-6 shadow-sm md:p-8">
+                            <ContactForm />
+                        </div>
+                        <p className="mt-4 text-center text-sm text-muted-foreground">
+                            Or email us directly at{' '}
+                            <a
+                                href="mailto:team@roscas.io"
+                                className="text-primary font-medium hover:underline">
+                                team@roscas.io
                             </a>
-                        </Button>
-                        <p className="text-sm text-muted-foreground mt-3">
-                            (This will open your default email application)
                         </p>
                     </div>
 
-                     {/* Optional: Link back to home */}
-                     <div className="pt-8">
-                         <Link href="/" className="text-sm text-primary hover:underline">
-                             &larr; Back to Home
-                         </Link>
-                     </div>
+                    <div className="pt-8">
+                        <Link href="/" className="text-sm text-primary hover:underline">
+                            &larr; Back to Home
+                        </Link>
+                    </div>
                 </div>
             </section>
         </>
