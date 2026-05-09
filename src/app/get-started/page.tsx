@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import GetStartedForm from './GetStartedForm'
 
 export const metadata: Metadata = {
@@ -23,7 +24,7 @@ export default function GetStartedPage() {
                     Roscas is a free Android app that helps you run your savings
                     circle &mdash; Paluwagan, Ajo, Pardna, Esusu, Chama or any
                     rotating group &mdash; with less admin and more trust. We&apos;re
-                    in early access and looking for groups who want to help shape it.
+                    in early access. The first 50 organisers shape what Roscas becomes.
                 </p>
                 <p className="mx-auto mt-3 max-w-2xl text-base text-muted-foreground">
                     Tell us a little about your circle and we&apos;ll be in touch within 48 hours.
@@ -36,6 +37,22 @@ export default function GetStartedPage() {
                 <div className="mx-auto max-w-2xl px-6">
                     <div className="rounded-2xl border bg-background p-6 shadow-sm md:p-10">
                         <GetStartedForm />
+                    </div>
+                    <div className="mx-auto mt-8 max-w-xl rounded-xl border bg-background/60 p-5 text-sm text-muted-foreground">
+                        <p>
+                            <strong className="text-foreground">
+                                Already running circles in your community?
+                            </strong>{' '}
+                            If you&apos;re well-connected and already trusted by
+                            other organisers, take a look at our{' '}
+                            <Link
+                                href="/community-liaison"
+                                className="text-primary font-medium hover:underline">
+                                Community Liaison
+                            </Link>{' '}
+                            role &mdash; a short paid sprint to help us reach
+                            the right people.
+                        </p>
                     </div>
                     <p className="mt-6 text-center text-sm text-muted-foreground">
                         Prefer email? Write to{' '}

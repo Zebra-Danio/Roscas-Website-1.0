@@ -5,7 +5,7 @@ type BaseProps = {
     id: string
     label: string
     required?: boolean
-    helpText?: string
+    helpText?: React.ReactNode
     error?: string
 }
 

@@ -1,10 +1,30 @@
 'use client'
 
+import Link from 'next/link'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { TextField, TextareaField } from '@/components/forms/FormField'
+import {
+    SelectField,
+    TextField,
+    TextareaField,
+} from '@/components/forms/FormField'
 import { FormStatus } from '@/components/forms/FormStatus'
 import { submitForm } from '@/lib/forms'
+
+const TRIED_ROSCAS_OPTIONS = [
+    {
+        value: "Yes — I've signed up as a Beta Organiser",
+        label: "Yes — I've signed up as a Beta Organiser",
+    },
+    {
+        value: "Not yet — but I'd be happy to before we talk",
+        label: "Not yet — but I'd be happy to before we talk",
+    },
+    {
+        value: "I'd prefer to discuss the role without testing first",
+        label: "I'd prefer to discuss the role without testing first",
+    },
+]
 
 export default function CommunityLiaisonForm() {
     const [submitting, setSubmitting] = useState(false)
@@ -23,6 +43,7 @@ export default function CommunityLiaisonForm() {
             name: String(formData.get('name') || ''),
             email: String(formData.get('email') || ''),
             about: String(formData.get('about') || ''),
+            tried_roscas: String(formData.get('tried_roscas') || ''),
             referrer: String(formData.get('referrer') || ''),
         }
 
@@ -71,6 +92,23 @@ export default function CommunityLiaisonForm() {
                 required
                 rows={6}
                 placeholder="Where do you live in the UK? Which communities are you part of? Do you know people who run savings circles? Anything you'd like us to know about you."
+            />
+            <SelectField
+                id="tried_roscas"
+                label="Have you tried Roscas yourself?"
+                options={TRIED_ROSCAS_OPTIONS}
+                helpText={
+                    <>
+                        Many of our Community Liaisons come through the Beta
+                        Organiser route &mdash; you can{' '}
+                        <Link
+                            href="/get-started"
+                            className="text-primary font-medium hover:underline">
+                            sign up for that here
+                        </Link>{' '}
+                        if you&apos;d like to try the app first.
+                    </>
+                }
             />
             <TextField
                 id="referrer"

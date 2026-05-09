@@ -45,8 +45,8 @@ export default function CommunityLiaisonPage() {
                     savings circles with less stress and more trust.
                 </p>
                 <p className="mx-auto mt-3 max-w-2xl text-base text-muted-foreground">
-                    That&apos;s the role. It&apos;s paid, it&apos;s flexible, and
-                    it matters.
+                    That&apos;s the Community Liaison role. It&apos;s paid,
+                    it&apos;s flexible, and it matters.
                 </p>
             </section>
 
@@ -68,6 +68,29 @@ export default function CommunityLiaisonPage() {
                         </li>
                     ))}
                 </ul>
+            </section>
+
+            <section className="mx-auto max-w-3xl px-6 py-10">
+                <h2 className="text-2xl font-medium md:text-3xl">
+                    Why this is a short sprint, not a long-term role
+                </h2>
+                <div className="mt-6 space-y-4 text-base text-foreground/90">
+                    <p>
+                        The aim of this role is to spark adoption. A small
+                        number of trusted introductions to the right organisers
+                        is what gets Roscas off the ground &mdash; and once
+                        that flywheel starts turning, the community itself does
+                        the rest.
+                    </p>
+                    <p>
+                        The four-week initial term is deliberate. If the work
+                        is going well after the first month, we extend it. When
+                        organic referrals from happy organisers are doing the
+                        heavy lifting, the role steps back. We&apos;d rather
+                        pay you well for a short, focused sprint than thinly
+                        for an open-ended one.
+                    </p>
+                </div>
             </section>
 
             <section className="mx-auto max-w-3xl px-6 py-10">
@@ -119,6 +142,24 @@ export default function CommunityLiaisonPage() {
                     </div>
                     <div className="rounded-2xl border bg-background p-6 shadow-sm md:p-10">
                         <CommunityLiaisonForm />
+                    </div>
+                    <div className="mx-auto mt-8 max-w-xl rounded-xl border bg-background/60 p-5 text-sm text-muted-foreground">
+                        <p>
+                            <strong className="text-foreground">
+                                Not running a circle yet but thinking about
+                                starting one?
+                            </strong>{' '}
+                            The{' '}
+                            <Link
+                                href="/get-started"
+                                className="text-primary font-medium hover:underline">
+                                Beta Organiser
+                            </Link>{' '}
+                            programme is the natural entry point &mdash; many
+                            of our Community Liaisons come through that route.
+                            It&apos;s free, you run a real circle on the app,
+                            and we work directly with you.
+                        </p>
                     </div>
                 </div>
             </section>
