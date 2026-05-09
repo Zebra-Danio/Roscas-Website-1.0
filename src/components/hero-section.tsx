@@ -134,7 +134,7 @@ export default function HeroSection() {
                                     <Link
                                         href="/community-liaison"
                                         className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
-                                        Become a Community Ambassador
+                                        Become a Community Liaison
                                     </Link>
                                 </AnimatedGroup>
                             </div>
