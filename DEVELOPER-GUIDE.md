@@ -156,7 +156,8 @@ git log --oneline --merges
 
 ### Last known-good rollback target (current as of May 2026)
 
-- `f4f5696` — checkpoint snapshot before the acquisition-engine work. Equivalent to the May 2026 pre-launch state.
+- `3dfa04f` — Community Liaison copy unification and short-sprint framing (pre–spreadsheet blog post deploy).
+- `f4f5696` — checkpoint snapshot before the acquisition-engine work.
 
 ---
 

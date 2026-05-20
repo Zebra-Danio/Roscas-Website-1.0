@@ -40,6 +40,8 @@ Open [public/sitemap.xml](./public/sitemap.xml) and add a new `<url>` block for 
 
 The slug is the filename without the `.md` extension. Editing an existing post does not require a sitemap change.
 
+**Current posts** (5 as of May 2026): filenames in `content/posts/` match the URL slug exactly, e.g. `Tired-of-Spreadsheets-The-Future-of-Managing-Your-Savings-Circle-is-Here.md` → `/blog/Tired-of-Spreadsheets-The-Future-of-Managing-Your-Savings-Circle-is-Here`.
+
 ### 4. Deploy
 
 ```bash

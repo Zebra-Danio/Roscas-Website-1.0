@@ -84,7 +84,8 @@ Because the site is statically exported, there are no Next.js API routes availab
 - Site-wide metadata defaults (title template, OG, Twitter cards, robots) live in [src/app/layout.tsx](./src/app/layout.tsx).
 - Each page exports `export const metadata` for its specific title/description.
 - Blog post metadata is generated dynamically by `generateMetadata` in [src/app/blog/[slug]/page.tsx](./src/app/blog/[slug]/page.tsx), reading the post's frontmatter and content.
-- `public/sitemap.xml` is **manually maintained** — when you add a blog post, append a `<url>` entry. `public/robots.txt` points crawlers at the sitemap.
+- `public/sitemap.xml` is **manually maintained** — when you add a blog post, append a `<url>` entry. Also includes `/get-started` and `/community-liaison` (acquisition routes). `public/robots.txt` points crawlers at the sitemap.
+- Blog posts live in `content/posts/` (5 posts as of May 2026). Cover images go in `public/images/posts/`.
 
 ## Development Workflow
 
