@@ -156,7 +156,8 @@ git log --oneline --merges
 
 ### Last known-good rollback target (current as of May 2026)
 
-- `3dfa04f` — Community Liaison copy unification and short-sprint framing (pre–spreadsheet blog post deploy).
+- `ff06fd0` — spreadsheet blog post, full sitemap, docs refresh (current live, May 2026).
+- `3dfa04f` — Community Liaison copy unification and short-sprint framing.
 - `f4f5696` — checkpoint snapshot before the acquisition-engine work.
 
 ---
