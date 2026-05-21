@@ -1,8 +1,9 @@
 # Brief — Moving roscas.io DNS to Cloudflare
 
-> **Status:** Decision brief, not yet decided. Sibling to [DECISION-001.md](./DECISION-001.md) in style, but this file documents a proposed change, not a ratified one. If accepted, convert to `DECISION-002.md`.
+> **Status:** Decided — **deferred**. The JS-beacon-only path described in §7 ("What to do instead, right now") was implemented in May 2026 (commit `242bb76`). Cloudflare Web Analytics is live, no DNS migration was performed. Full migration to remain parked until one of the triggers in §7 fires.
 > **Author:** drafted May 2026.
 > **Audience:** Roscas MD + Maya (marketing). Skim time ~5 minutes.
+> **Implementation status:** see [Postscript](#postscript--may-2026-what-actually-happened) at the bottom.
 
 ---
 
@@ -182,3 +183,32 @@ Reasoning, in order of importance:
 - Is the domain registration auto-renew on?
 - Does `team@roscas.io` have a backup recovery address that *isn't* `@roscas.io`? (If Zoho breaks mid-migration, locking yourself out is the worst case.)
 - Is there a subdomain plan (e.g. `app.roscas.io`, `api.roscas.io`) on the roadmap? If yes, factor that into the DNS design at migration time, not afterward.
+
+---
+
+## Postscript — May 2026 (what actually happened)
+
+The brief recommended deferring full DNS migration and taking the JS-beacon-only path instead. That path was implemented and shipped to production on **2026-05-21** as commit `242bb76` ("Merge branch 'feature/analytics-foundation'").
+
+**What was done:**
+
+- Cloudflare Web Analytics JS beacon added to `src/app/layout.tsx` via `next/script` (`afterInteractive`).
+- Google Search Console verification added to the same file via `metadata.verification.google` (a parallel-but-independent change; not Cloudflare-related but shipped in the same deploy).
+
+**What was not done:**
+
+- DNS nameservers at GoDaddy were not changed. The `roscas.io` A record still points directly to Firebase Hosting (`199.36.158.100`).
+- No Cloudflare features other than Web Analytics are active (no CDN, no DDoS protection at the edge, no Cloudflare TLS).
+- Zoho email (`team@roscas.io`) routing is untouched.
+
+**When to re-open this brief and execute §2:**
+
+The trigger conditions listed in §7 remain authoritative:
+
+- Sustained traffic crosses ~10,000 sessions/month.
+- A real traffic spike, scrape, or abuse incident hits the site.
+- You decide to host downloads (APK, video assets) on `roscas.io` directly.
+- Firebase Hosting pricing or feature changes shift the calculus.
+- You're already in the GoDaddy/DNS dashboard for an unrelated reason (piggyback opportunity).
+
+Day-to-day analytics ops, token rotation, and the rationale for the current stack are now documented in [DEVELOPER-GUIDE.md § Analytics](./DEVELOPER-GUIDE.md#analytics) — that's the right read for "how do I do X today?"; this brief remains the right read for "should we revisit the full migration?"

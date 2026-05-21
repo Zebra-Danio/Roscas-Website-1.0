@@ -15,10 +15,11 @@ Open [http://localhost:3000](http://localhost:3000). Blog editing via TinaCMS at
 
 | Guide | Use when |
 |---|---|
-| [DEVELOPER-GUIDE.md](./DEVELOPER-GUIDE.md) | Day-to-day edits, forms, deploy, rollback |
+| [DEVELOPER-GUIDE.md](./DEVELOPER-GUIDE.md) | Day-to-day edits, forms, analytics, deploy, rollback |
 | [HOW-TO-UPDATE-BLOG.md](./HOW-TO-UPDATE-BLOG.md) | Adding or editing blog posts |
 | [PROJECT-DOCUMENTATION.md](./PROJECT-DOCUMENTATION.md) | Architecture and implementation detail |
 | [DECISION-001.md](./DECISION-001.md) | Brand/copy constraints (no blockchain language) |
+| [BRIEF-Cloudflare-Migration.md](./BRIEF-Cloudflare-Migration.md) | Parked decision: moving DNS to Cloudflare (deferred May 2026) |
 | [FIREBASE-CONFIG-README.md](./FIREBASE-CONFIG-README.md) | Firebase hosting setup |
 
 ## Deploy to live

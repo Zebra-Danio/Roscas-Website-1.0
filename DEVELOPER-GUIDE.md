@@ -1,6 +1,6 @@
 # Developer Guide — roscas.io
 
-> **Read this first.** Practical orientation for anyone (human or AI) opening this repo to make changes. For deeper architectural detail see [PROJECT-DOCUMENTATION.md](./PROJECT-DOCUMENTATION.md). For the brand/content rule that constrains the public site see [DECISION-001.md](./DECISION-001.md). For blog-only edits see [HOW-TO-UPDATE-BLOG.md](./HOW-TO-UPDATE-BLOG.md).
+> **Read this first.** Practical orientation for anyone (human or AI) opening this repo to make changes. For deeper architectural detail see [PROJECT-DOCUMENTATION.md](./PROJECT-DOCUMENTATION.md). For the brand/content rule that constrains the public site see [DECISION-001.md](./DECISION-001.md). For blog-only edits see [HOW-TO-UPDATE-BLOG.md](./HOW-TO-UPDATE-BLOG.md). For the parked decision on moving DNS to Cloudflare see [BRIEF-Cloudflare-Migration.md](./BRIEF-Cloudflare-Migration.md).
 
 ---
 
@@ -46,6 +46,7 @@ All three forms email **team@roscas.io**.
 | Ambassador page | [src/app/community-liaison/page.tsx](./src/app/community-liaison/page.tsx) + `CommunityLiaisonForm.tsx` |
 | Contact page | [src/app/contact/page.tsx](./src/app/contact/page.tsx) + `ContactForm.tsx` |
 | Site-wide SEO defaults (title template, OG, robots) | [src/app/layout.tsx](./src/app/layout.tsx) |
+| Analytics tokens (GSC verification, Cloudflare beacon) | [src/app/layout.tsx](./src/app/layout.tsx) |
 | Sitemap (manual, edit when adding posts) | [public/sitemap.xml](./public/sitemap.xml) |
 | robots.txt | [public/robots.txt](./public/robots.txt) |
 | Blog posts | [content/posts/*.md](./content/posts/) |
@@ -98,6 +99,40 @@ NEXT_PUBLIC_WEB3FORMS_KEY=<access key from web3forms.com>
 3. Use `<TextField>`/`<TextareaField>`/`<SelectField>` from `forms/FormField`.
 4. On submit, call `submitForm(payload, { subject: 'Roscas feedback — ...', from_name: 'Roscas — Feedback' })`.
 5. On `result.success`, render `<FormStatus variant="success" ... />`.
+
+---
+
+## Analytics
+
+The site uses two cookieless, GDPR/PECR-compliant analytics tools. **No cookie consent banner is required.** Both are wired in [src/app/layout.tsx](./src/app/layout.tsx) and ship on every route.
+
+### Google Search Console
+
+- Verified via the HTML-tag method. Emitted from `metadata.verification.google` in the root layout's `Metadata` object — Next.js generates the `<meta name="google-site-verification" content="..." />` tag in `<head>` for every prerendered page.
+- Property is registered to `garycrooks39@gmail.com`.
+- Used for indexing health, search-query data (terms that surface roscas.io in Google), and Core Web Vitals.
+
+### Cloudflare Web Analytics
+
+- **JS-beacon mode** — the lightweight path that doesn't require migrating DNS to Cloudflare. See [BRIEF-Cloudflare-Migration.md](./BRIEF-Cloudflare-Migration.md) for why we chose this over a full DNS migration.
+- Loaded via `next/script` with `strategy="afterInteractive"` so it doesn't block first paint.
+- Cookieless, no PII collection, no consent banner required.
+- Dashboard: [one.dash.cloudflare.com](https://one.dash.cloudflare.com) → Web → Web Analytics.
+
+### Token rotation
+
+Both tokens are **public client-side identifiers** (analogous to `NEXT_PUBLIC_WEB3FORMS_KEY`) — committed directly in `src/app/layout.tsx`, not stored as env vars. To rotate:
+
+| Token | Where | How |
+|---|---|---|
+| Google site-verification | `metadata.verification.google` | Get a new value from Search Console (HTML-tag method), replace string, redeploy. |
+| Cloudflare beacon | `data-cf-beacon` JSON on the `<Script>` element | Get a new token in the Cloudflare Web Analytics dashboard, replace inside the JSON, redeploy. |
+
+### What this stack deliberately doesn't include
+
+- **GA4 / Google Analytics** — would require a cookie consent banner under UK GDPR/PECR.
+- **Microsoft Clarity** (session recordings) — useful for funnel optimisation at higher traffic. Currently parked; revisit when traffic justifies the consent-banner overhead.
+- **Server-side analytics** — impossible with the static-export architecture (no Next.js API routes). All analytics are client-side beacons.
 
 ---
 
@@ -156,9 +191,9 @@ git log --oneline --merges
 
 ### Last known-good rollback target (current as of May 2026)
 
-- `ff06fd0` — spreadsheet blog post, full sitemap, docs refresh (current live, May 2026).
+- `242bb76` — Analytics foundation: Search Console verification, Cloudflare Web Analytics beacon, migration brief (current live, May 2026).
+- `ff06fd0` — Spreadsheet blog post, full sitemap, docs refresh.
 - `3dfa04f` — Community Liaison copy unification and short-sprint framing.
-- `f4f5696` — checkpoint snapshot before the acquisition-engine work.
 
 ---
 

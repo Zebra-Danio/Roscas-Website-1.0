@@ -1,6 +1,6 @@
 # Roscas Website Documentation
 
-> For day-to-day "where do I edit X?" orientation, read [DEVELOPER-GUIDE.md](./DEVELOPER-GUIDE.md) first. For the brand-copy rule that constrains all public pages, read [DECISION-001.md](./DECISION-001.md). This file is the deeper architectural reference.
+> For day-to-day "where do I edit X?" orientation, read [DEVELOPER-GUIDE.md](./DEVELOPER-GUIDE.md) first. For the brand-copy rule that constrains all public pages, read [DECISION-001.md](./DECISION-001.md). For the parked decision on moving DNS to Cloudflare, read [BRIEF-Cloudflare-Migration.md](./BRIEF-Cloudflare-Migration.md). This file is the deeper architectural reference.
 
 ## Project Overview
 
@@ -12,6 +12,7 @@ This is a Next.js website with TinaCMS integration for blog content management, 
 - **Content Management (blog)**: TinaCMS for local development editing
 - **Hosting**: Firebase Hosting (static site, no server-side rendering)
 - **Forms backend**: Web3Forms (browser-direct POST → email to `team@roscas.io`)
+- **Analytics**: Google Search Console (HTML-tag verification) + Cloudflare Web Analytics (JS-beacon mode, cookieless). No GA4, no cookie banner.
 - **Media Handling**: Direct storage in public/images/posts with proxy for Windows path compatibility
 - **Markdown Rendering**: `react-markdown` for rendering blog content in production builds
 
@@ -78,6 +79,16 @@ Because the site is statically exported, there are no Next.js API routes availab
 - Status banner: [src/components/forms/FormStatus.tsx](./src/components/forms/FormStatus.tsx)
 - Access key: env var `NEXT_PUBLIC_WEB3FORMS_KEY` in `.env.local` (gitignored). Web3Forms access keys are public client-side identifiers, not secret credentials. An example is committed at `.env.local.example`.
 - Because the key is `NEXT_PUBLIC_*`, it is baked into the static bundle at build time. After rotating the key, you must rebuild and redeploy.
+
+### Analytics
+
+Two cookieless, GDPR/PECR-compliant tools, both wired in [src/app/layout.tsx](./src/app/layout.tsx) and active on every prerendered route. No consent banner is required.
+
+- **Google Search Console** — verified via the HTML-tag method using Next.js `metadata.verification.google`. Next emits `<meta name="google-site-verification" ... />` into `<head>` site-wide.
+- **Cloudflare Web Analytics** — JS-beacon mode (no DNS migration). Loaded via `next/script` with `strategy="afterInteractive"`.
+- Both tokens are **public client-side identifiers**, committed directly in source. No env vars (unlike `NEXT_PUBLIC_WEB3FORMS_KEY`, these don't rotate often enough to warrant the indirection).
+- Daily ops, token rotation steps, and the deliberate omission of GA4 / Clarity / server-side analytics are documented in [DEVELOPER-GUIDE.md § Analytics](./DEVELOPER-GUIDE.md#analytics).
+- Architectural context for choosing JS-beacon mode over a full Cloudflare DNS migration: [BRIEF-Cloudflare-Migration.md](./BRIEF-Cloudflare-Migration.md).
 
 ### SEO
 
@@ -170,6 +181,8 @@ For a deeper dive into the branching/deploy workflow see [DEVELOPER-GUIDE.md](./
 - `content/posts/`: Directory containing Markdown files for blog posts.
 - `src/app/blog/[slug]/page.tsx` (and similar dynamic route files): Implement `generateStaticParams` for SSG and data fetching logic.
 - `src/lib/forms.ts`, `src/components/forms/`: The Web3Forms submission primitives used by all three forms.
+- `src/app/layout.tsx`: Also home to the Google Search Console verification token (`metadata.verification.google`) and the Cloudflare Web Analytics beacon `<Script>`.
+- `BRIEF-Cloudflare-Migration.md`: Decision brief for moving DNS to Cloudflare. Status: deferred; JS-beacon-only path was implemented instead. Revisit when the triggers in §7 of the brief fire.
 - `.env.local`: Holds `NEXT_PUBLIC_WEB3FORMS_KEY`. Gitignored. Example committed at `.env.local.example`.
 
 ## Known Issues and Solutions
