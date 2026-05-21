@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { TinaCMSProvider } from "@/lib/tina";
 import { HeroHeader } from "@/components/hero5-header";
@@ -65,6 +66,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  verification: {
+    google: "fdQdmv4En10evjkPx3FiCWaKz-nYJIehSKYyYvGkI1M",
+  },
 };
 
 export default function RootLayout({
@@ -79,6 +83,12 @@ export default function RootLayout({
           <HeroHeader />
           <main>{children}</main>
         </TinaCMSProvider>
+        {/* Cloudflare Web Analytics — JS-beacon mode, cookieless. See BRIEF-Cloudflare-Migration.md. */}
+        <Script
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          strategy="afterInteractive"
+          data-cf-beacon='{"token": "1330d44ea581494e9cd945090fa81090"}'
+        />
       </body>
     </html>
   );
