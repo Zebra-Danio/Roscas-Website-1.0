@@ -117,24 +117,24 @@ export const HeroHeader = () => {
                                     variant="outline"
                                     size="sm"
                                     className={cn(isScrolled && 'lg:hidden')}>
-                                    <Link href="/community-liaison">
-                                        <span>Join Us</span>
+                                    <Link href="/get-started">
+                                        <span>Get Started</span>
                                     </Link>
                                 </Button>
                                 <Button
                                     asChild
                                     size="sm"
                                     className={cn(isScrolled && 'lg:hidden')}>
-                                    <Link href="/get-started">
-                                        <span>Get Started</span>
+                                    <Link href="/your-circle">
+                                        <span>Your Circle</span>
                                     </Link>
                                 </Button>
                                 <Button
                                     asChild
                                     size="sm"
                                     className={cn(isScrolled ? 'lg:inline-flex' : 'hidden')}>
-                                    <Link href="/get-started">
-                                        <span>Get Started</span>
+                                    <Link href="/your-circle">
+                                        <span>Your Circle</span>
                                     </Link>
                                 </Button>
                             </div>

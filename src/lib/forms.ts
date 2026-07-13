@@ -31,10 +31,18 @@ export async function submitForm(
         };
     }
 
+    // Wire the submitter's email into Web3Forms' replyto field so replying
+    // to a notification email goes to the person, not back to ourselves.
+    const replyto =
+        typeof payload.email === 'string' && payload.email.includes('@')
+            ? { replyto: payload.email }
+            : {};
+
     const body = {
         access_key: accessKey,
         subject: options.subject,
         from_name: options.from_name ?? 'Roscas Website',
+        ...replyto,
         ...payload,
     };
 

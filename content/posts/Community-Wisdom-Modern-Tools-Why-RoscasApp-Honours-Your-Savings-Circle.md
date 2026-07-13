@@ -55,7 +55,7 @@ Automate Reminders: Gentle nudges help everyone stay on track without the hassle
 
 Communicate Securely: Keep your group connected within the app.
 
-We believe in "banking done by the people" and keeping value local. RoscasApp is built to support community finance, strengthening the circulation of resources within your group, not extracting value from it. We use modern security like secure login via Privy.io and reliable record-keeping (subtly enhanced by blockchain for integrity) to give you peace of mind.
+We believe in "banking done by the people" and keeping value local. RoscasApp is built to support community finance, strengthening the circulation of resources within your group, not extracting value from it. We use modern security like secure login and reliable, tamper-resistant record-keeping to give you peace of mind.
 
 ### Honouring Community, Looking Forward
 

@@ -21,7 +21,7 @@ export default function FAQsThree() {
         },
         {
             id: 'item-2',
-            icon: 'wallet',
+            icon: 'banknote',
             question: 'Does RoscasApp handle the money transfers between members?',
             answer: 'No. RoscasApp is a tool specifically designed for managing and tracking your savings circle contributions and payouts. You and your group members continue to exchange money directly using your preferred methods (e.g., cash, bank transfer, mobile money). The app simply provides a clear, shared record of these agreed transactions.',
         },
@@ -47,7 +47,7 @@ export default function FAQsThree() {
             id: 'item-6',
             icon: 'users',
             question: 'How do I add members to my savings circle?',
-            answer: 'Once an organizer creates a circle in the app, they can easily share a unique invitation link with potential members via WhatsApp, SMS, email, or any other messaging platform. Members simply click the link to join the group within the app.',
+            answer: 'Once an organiser creates a circle in the app, they can easily share a unique invitation link with potential members via WhatsApp, SMS, email, or any other messaging platform. Members simply click the link to join the group within the app.',
         },
         {
             id: 'item-7',
@@ -59,7 +59,7 @@ export default function FAQsThree() {
             id: 'item-8',
             icon: 'map-pin',
             question: 'Is this app available outside the UK?',
-            answer: 'Currently, our pilot launch (starting [Approximate Launch Date/Quarter]) is focused specifically on serving Filipino and Nigerian diaspora communities within the United Kingdom. We plan to explore expansion to other regions in the future based on feedback and local requirements.',
+            answer: 'Our early access is currently focused on serving Filipino and Nigerian diaspora communities within the United Kingdom. We plan to explore expansion to other regions in the future based on feedback and local requirements.',
         },
     ]
 

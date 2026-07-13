@@ -10,7 +10,7 @@ export default function BlogCTA() {
             <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
                 <div className="space-y-2">
                     <h3 className="text-2xl font-medium md:text-3xl">
-                        Want to try the app?
+                        Keep your circle. Lose the spreadsheet.
                     </h3>
                     <p className="text-muted-foreground">
                         Roscas is free, in early access, and looking for groups
@@ -19,8 +19,8 @@ export default function BlogCTA() {
                     </p>
                 </div>
                 <Button asChild size="lg" className="shrink-0 gap-2">
-                    <Link href="/get-started">
-                        <span>Get Started</span>
+                    <Link href="/your-circle">
+                        <span>Bring your circle</span>
                         <ArrowRight className="size-4" />
                     </Link>
                 </Button>

@@ -127,10 +127,15 @@ export default function HeroSection() {
                                     }}
                                     className="mt-12 flex flex-col items-center justify-center gap-4">
                                     <Button asChild size="lg" className="px-6">
-                                        <Link href="/get-started">
-                                            <span>Get Started — Try the app free</span>
+                                        <Link href="/your-circle">
+                                            <span>Keep your circle. Lose the spreadsheet.</span>
                                         </Link>
                                     </Button>
+                                    <Link
+                                        href="/get-started"
+                                        className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
+                                        New to savings circles? Get started — the app is free
+                                    </Link>
                                     <Link
                                         href="/community-liaison"
                                         className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">

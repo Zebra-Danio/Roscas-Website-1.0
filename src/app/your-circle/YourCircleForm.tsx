@@ -2,26 +2,30 @@
 
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { TextField, SelectField } from '@/components/forms/FormField'
+import {
+    TextField,
+    TextareaField,
+    SelectField,
+} from '@/components/forms/FormField'
 import { FormStatus } from '@/components/forms/FormStatus'
 import { submitForm } from '@/lib/forms'
-
-const PARTICIPATION_OPTIONS = [
-    { value: 'Yes — currently in a circle', label: 'Yes' },
-    { value: 'No — not currently', label: 'No' },
-    { value: "I'd like to join one", label: "I'd like to" },
-]
 
 const TRADITION_OPTIONS = [
     { value: 'Paluwagan', label: 'Paluwagan (Filipino)' },
     { value: 'Ajo', label: 'Ajo (Nigerian)' },
-    { value: 'Pardna', label: 'Pardna (Caribbean)' },
     { value: 'Esusu', label: 'Esusu (West African)' },
+    { value: 'Pardna', label: 'Pardna (Caribbean)' },
     { value: 'Chama', label: 'Chama (Kenyan)' },
-    { value: 'Other', label: 'Other / not sure' },
+    { value: 'Dhukuti', label: 'Dhukuti (Nepali)' },
+    { value: 'Other', label: 'Other / our own tradition' },
 ]
 
-export default function GetStartedForm() {
+const ROLE_OPTIONS = [
+    { value: 'I organise it', label: 'I organise it' },
+    { value: "I'm a member", label: "I'm a member" },
+]
+
+export default function YourCircleForm() {
     const [submitting, setSubmitting] = useState(false)
     const [result, setResult] = useState<
         { success: boolean; message: string } | null
@@ -38,14 +42,15 @@ export default function GetStartedForm() {
             name: String(formData.get('name') || ''),
             email: String(formData.get('email') || ''),
             whatsapp_or_phone: String(formData.get('whatsapp_or_phone') || ''),
-            participation: String(formData.get('participation') || ''),
             tradition: String(formData.get('tradition') || ''),
-            group_size: String(formData.get('group_size') || ''),
+            members_count: String(formData.get('members_count') || ''),
+            tracking_today: String(formData.get('tracking_today') || ''),
+            role: String(formData.get('role') || ''),
         }
 
         const res = await submitForm(payload, {
-            subject: `New early access signup — ${payload.name}`,
-            from_name: 'Roscas — Early Access Signup',
+            subject: `Your Circle signup — ${payload.name}`,
+            from_name: 'Roscas — Your Circle',
         })
         setResult(res)
         setSubmitting(false)
@@ -59,7 +64,7 @@ export default function GetStartedForm() {
         return (
             <FormStatus
                 variant="success"
-                title="Thank you — your details are with us."
+                title="Thank you — your circle's details are with us."
                 message="We'll be in touch within 48 hours. Keep an eye on your inbox (and spam folder, just in case)."
             />
         )
@@ -91,23 +96,37 @@ export default function GetStartedForm() {
                 placeholder="e.g. +44 7700 900123"
                 helpText="If it's easier to chat on WhatsApp, pop your number here."
             />
+
+            <fieldset className="space-y-5 rounded-xl border p-4">
+                <legend className="px-1 text-sm font-medium">
+                    Tell us about your circle
+                </legend>
+                <SelectField
+                    id="tradition"
+                    label="Which tradition?"
+                    required
+                    options={TRADITION_OPTIONS}
+                />
+                <TextField
+                    id="members_count"
+                    label="How many people in your circle?"
+                    inputMode="numeric"
+                    placeholder="e.g. 12"
+                />
+                <TextareaField
+                    id="tracking_today"
+                    label="How do you keep track today?"
+                    rows={3}
+                    placeholder="e.g. a spreadsheet plus a WhatsApp group"
+                    helpText="Optional — notebook, spreadsheet, WhatsApp, memory…"
+                />
+            </fieldset>
+
             <SelectField
-                id="participation"
-                label="Do you currently run or participate in a savings circle?"
+                id="role"
+                label="Your role in the circle"
                 required
-                options={PARTICIPATION_OPTIONS}
-            />
-            <SelectField
-                id="tradition"
-                label="Which community tradition?"
-                required
-                options={TRADITION_OPTIONS}
-            />
-            <TextField
-                id="group_size"
-                label="How many people in your group?"
-                placeholder="e.g. 12"
-                helpText="Optional. If you're not sure, leave blank."
+                options={ROLE_OPTIONS}
             />
 
             {result && !result.success && (
@@ -123,7 +142,7 @@ export default function GetStartedForm() {
                 size="lg"
                 disabled={submitting}
                 className="w-full">
-                {submitting ? 'Sending…' : 'Sign me up for early access'}
+                {submitting ? 'Sending…' : 'Bring my circle to Roscas'}
             </Button>
 
             <p className="text-center text-xs text-muted-foreground">
