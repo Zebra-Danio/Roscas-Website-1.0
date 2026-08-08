@@ -1,12 +1,14 @@
 ---
 title: Running an Ajo or Esusu? Keep Your Circle, Lose the Spreadsheet
-date: 2026-07-31T12:00:00.000Z
+date: 2026-08-08T11:30:00.000Z
 tags:
   - Ajo
   - Esusu
   - Savings Circle
   - Rosca
-coverImage: /images/posts/PENDING-GARY-PICK.png
+coverImage: /images/posts/ajo-esusu-collector.png
+metaTitle: Ajo & Esusu App — Keep Your Circle, Lose the Spreadsheet
+metaDescription: Run your ajo or esusu exactly the way you always have. Roscas is a free app that tracks contributions, turn order and payouts. No fees, no cut of the pot — ever.
 ---
 
 Call it ajo, esusu, isusu or adashe — the names change across Nigeria's communities, but the idea is the same everywhere, and it long predates any bank. A group of people who trust each other contribute a fixed amount on a fixed rhythm, and each member takes their turn to collect the whole pot. No interest, no credit checks, no forms. It has funded shop stock in Lagos, school fees in Ibadan, and house deposits in London — because the tradition travelled with the people who carry it.
@@ -54,3 +56,7 @@ Two things worth knowing. First, Roscas never touches the money. Contributions m
 Roscas is currently in early access on Android, and we're inviting organisers to bring the circles they already run. You don't need to start something new or talk anyone into new rules. Same ajo, same people, same trust — just with the notebook retired.
 
 **Keep your circle. Lose the spreadsheet.** [Bring your circle to Roscas at roscas.io/your-circle](https://roscas.io/your-circle)
+
+---
+
+*More in this series: [Running a Paluwagan? Keep Your Circle, Lose the Spreadsheet](/blog/paluwagan-app)*

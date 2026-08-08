@@ -51,3 +51,7 @@ Two things worth knowing. First, Roscas never touches the money. Your hulog move
 Roscas is currently in early access on Android, and we're inviting organisers to bring the circles they already run. You don't need to start something new or convince anyone to change the rules. Same paluwagan, same people, same trust — just with the notebook retired.
 
 **Keep your circle. Lose the spreadsheet.** [Bring your circle to Roscas at roscas.io/your-circle](https://roscas.io/your-circle)
+
+---
+
+*More in this series: [Running an Ajo or Esusu? Keep Your Circle, Lose the Spreadsheet](/blog/ajo-esusu-app)*

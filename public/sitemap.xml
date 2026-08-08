@@ -63,7 +63,13 @@
   </url>
   <url>
     <loc>https://roscas.io/blog/paluwagan-app</loc>
-    <lastmod>2026-07-12</lastmod>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://roscas.io/blog/ajo-esusu-app</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

@@ -35,8 +35,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!parsed) return {};
 
   const { data: fm, content } = parsed;
-  const title = (fm.title || slug).trim();
+  const title = (fm.metaTitle || fm.title || slug).trim();
   const description =
+    fm.metaDescription?.trim() ||
     content
       .replace(/---[\s\S]*?---/, '')
       .replace(/[#*\[\]()_`>|]/g, '')

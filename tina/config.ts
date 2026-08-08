@@ -75,6 +75,19 @@ export default defineConfig({
             required: true,
           },
           {
+            type: "string",
+            name: "metaTitle",
+            label: "Meta Title (SEO — overrides Title in search results)",
+          },
+          {
+            type: "string",
+            name: "metaDescription",
+            label: "Meta Description (SEO)",
+            ui: {
+              component: "textarea",
+            },
+          },
+          {
             type: "rich-text",
             name: "body",
             label: "Body",
