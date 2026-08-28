@@ -59,4 +59,4 @@ Roscas is currently in early access on Android, and we're inviting organisers to
 
 ---
 
-*More in this series: [Running a Paluwagan? Keep Your Circle, Lose the Spreadsheet](/blog/paluwagan-app)*
+*More in this series: [Running a Paluwagan? Keep Your Circle, Lose the Spreadsheet](/blog/paluwagan-app) · [What's a ROSCA? The Community Savings Tradition Older Than Banks](/blog/whats-a-rosca)*

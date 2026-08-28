@@ -16,8 +16,8 @@ To publish one:
 
 | File | Publish date |
 |---|---|
-| `whats-a-rosca.md` | Fri 14 Aug 2026 |
 | `trust-the-currency.md` | Fri 28 Aug 2026 |
 
 Published so far: `ajo-esusu-app.md` (went live Sat 8 Aug 2026 under
-APPROVAL-002; the 31 Jul slot moved because the image pick arrived 6 Aug).
+APPROVAL-002); `whats-a-rosca.md` (went live Fri 28 Aug 2026 under
+APPROVAL-003 / BRIEF-003).

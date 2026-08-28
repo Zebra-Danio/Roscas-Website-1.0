@@ -1,6 +1,6 @@
 ---
 title: What's a ROSCA? The Community Savings Tradition Older Than Banks
-date: 2026-08-14T12:00:00.000Z
+date: 2026-08-28T08:00:00.000Z
 tags:
   - Rosca
   - Savings Circle
@@ -8,7 +8,9 @@ tags:
   - Ajo
   - Pardna
   - Chama
-coverImage: /images/posts/PENDING-GARY-PICK.png
+coverImage: /images/posts/whats-a-rosca.png
+metaTitle: "What Is a ROSCA? Rotating Savings Circles Explained | Roscas"
+metaDescription: "Paluwagan, Ajo, Esusu, Pardna, Chama — different names, one idea. What a ROSCA is, how the rotating pot works, and why these savings circles run on trust."
 ---
 
 You may not have heard the word "ROSCA" before, even if you've been part of one your whole life.
@@ -75,3 +77,7 @@ We're in early access. We are working with a small group of organisers running r
 - **Just curious?** Follow along on [Facebook](https://www.facebook.com/616904701512859) and [Instagram](https://www.instagram.com/roscasteam/) — we share what we're learning as we build.
 
 Whatever you call it in your community — keep doing what you're doing. We're just here to make the running of it a little easier.
+
+---
+
+*More in this series: [Running a Paluwagan? Keep Your Circle, Lose the Spreadsheet](/blog/paluwagan-app) · [Running an Ajo or Esusu? Keep Your Circle, Lose the Spreadsheet](/blog/ajo-esusu-app)*

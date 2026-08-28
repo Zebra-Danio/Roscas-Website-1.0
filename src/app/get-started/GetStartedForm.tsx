@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { TextField, SelectField } from '@/components/forms/FormField'
+import { TextField, SelectField, HoneypotField } from '@/components/forms/FormField'
 import { FormStatus } from '@/components/forms/FormStatus'
 import { submitForm } from '@/lib/forms'
 
@@ -41,6 +41,7 @@ export default function GetStartedForm() {
             participation: String(formData.get('participation') || ''),
             tradition: String(formData.get('tradition') || ''),
             group_size: String(formData.get('group_size') || ''),
+            botcheck: String(formData.get('botcheck') || ''),
         }
 
         const res = await submitForm(payload, {
@@ -67,6 +68,7 @@ export default function GetStartedForm() {
 
     return (
         <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+            <HoneypotField />
             <TextField
                 id="name"
                 label="Your name"

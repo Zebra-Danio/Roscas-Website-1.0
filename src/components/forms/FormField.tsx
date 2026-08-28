@@ -117,3 +117,18 @@ export function SelectField({
         </div>
     )
 }
+
+/** Hidden Web3Forms honeypot. Must be a checkbox named `botcheck`. */
+export function HoneypotField() {
+    return (
+        <input
+            type="checkbox"
+            name="botcheck"
+            tabIndex={-1}
+            autoComplete="off"
+            className="hidden"
+            style={{ display: 'none' }}
+            aria-hidden="true"
+        />
+    )
+}

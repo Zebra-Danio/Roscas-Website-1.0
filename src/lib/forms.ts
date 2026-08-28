@@ -31,19 +31,34 @@ export async function submitForm(
         };
     }
 
+    const { botcheck, ...fields } = payload;
+
+    // Filled honeypot: pretend success and do not hit the API.
+    if (typeof botcheck === 'string' ? botcheck.length > 0 : Boolean(botcheck)) {
+        return {
+            success: true,
+            message: 'Thanks — your message is on its way.',
+        };
+    }
+
+    const name = typeof fields.name === 'string' ? fields.name.trim() : '';
+    const email = typeof fields.email === 'string' ? fields.email.trim() : '';
+    if (!name || !email.includes('@')) {
+        return {
+            success: false,
+            message:
+                'Please fill in your name and email so we can get back to you.',
+        };
+    }
+
     // Wire the submitter's email into Web3Forms' replyto field so replying
     // to a notification email goes to the person, not back to ourselves.
-    const replyto =
-        typeof payload.email === 'string' && payload.email.includes('@')
-            ? { replyto: payload.email }
-            : {};
-
     const body = {
         access_key: accessKey,
         subject: options.subject,
         from_name: options.from_name ?? 'Roscas Website',
-        ...replyto,
-        ...payload,
+        replyto: email,
+        ...fields,
     };
 
     try {

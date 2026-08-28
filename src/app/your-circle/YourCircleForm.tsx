@@ -6,6 +6,7 @@ import {
     TextField,
     TextareaField,
     SelectField,
+    HoneypotField,
 } from '@/components/forms/FormField'
 import { FormStatus } from '@/components/forms/FormStatus'
 import { submitForm } from '@/lib/forms'
@@ -46,6 +47,7 @@ export default function YourCircleForm() {
             members_count: String(formData.get('members_count') || ''),
             tracking_today: String(formData.get('tracking_today') || ''),
             role: String(formData.get('role') || ''),
+            botcheck: String(formData.get('botcheck') || ''),
         }
 
         const res = await submitForm(payload, {
@@ -72,6 +74,7 @@ export default function YourCircleForm() {
 
     return (
         <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+            <HoneypotField />
             <TextField
                 id="name"
                 label="Your name"
