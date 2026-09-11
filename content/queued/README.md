@@ -16,8 +16,9 @@ To publish one:
 
 | File | Publish date |
 |---|---|
-| `trust-the-currency.md` | Fri 28 Aug 2026 |
+| — | nothing currently queued |
 
 Published so far: `ajo-esusu-app.md` (went live Sat 8 Aug 2026 under
 APPROVAL-002); `whats-a-rosca.md` (went live Fri 28 Aug 2026 under
-APPROVAL-003 / BRIEF-003).
+APPROVAL-003 / BRIEF-003); `trust-the-currency.md` (went live Fri 11 Sep 2026
+under APPROVAL-004 / BRIEF-004).

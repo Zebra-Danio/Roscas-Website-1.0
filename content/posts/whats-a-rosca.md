@@ -9,7 +9,7 @@ tags:
   - Pardna
   - Chama
 coverImage: /images/posts/whats-a-rosca.png
-metaTitle: "What Is a ROSCA? Rotating Savings Circles Explained | Roscas"
+metaTitle: What Is a ROSCA? Rotating Savings Circles Explained
 metaDescription: "Paluwagan, Ajo, Esusu, Pardna, Chama — different names, one idea. What a ROSCA is, how the rotating pot works, and why these savings circles run on trust."
 ---
 
@@ -80,4 +80,4 @@ Whatever you call it in your community — keep doing what you're doing. We're j
 
 ---
 
-*More in this series: [Running a Paluwagan? Keep Your Circle, Lose the Spreadsheet](/blog/paluwagan-app) · [Running an Ajo or Esusu? Keep Your Circle, Lose the Spreadsheet](/blog/ajo-esusu-app)*
+*More in this series: [Running a Paluwagan? Keep Your Circle, Lose the Spreadsheet](/blog/paluwagan-app) · [Running an Ajo or Esusu? Keep Your Circle, Lose the Spreadsheet](/blog/ajo-esusu-app) · [Trust: The Currency Behind Every Savings Circle](/blog/trust-the-currency)*

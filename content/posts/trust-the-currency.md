@@ -1,12 +1,14 @@
 ---
 title: "Trust: The Currency Behind Every Savings Circle"
-date: 2026-08-28T12:00:00.000Z
+date: 2026-09-11T08:00:00.000Z
 tags:
   - Trust
   - Savings Circle
   - Rosca
   - Community
-coverImage: /images/posts/PENDING-GARY-PICK.png
+coverImage: /images/posts/trust-the-currency.png
+metaTitle: "Trust: The Currency Behind Every Savings Circle"
+metaDescription: "Savings circles run on trust rather than contracts — which is how Paluwagan, Ajo, Esusu, Pardna and Chama have outlasted empires. What that means for the record you keep."
 ---
 
 When economists try to explain why ROSCAs work, they reach for words like "social capital", "informal credit markets", "non-collateralised lending circles". All accurate. None of them quite capture what's actually happening when your aunt agrees to put £100 into a pot every month for ten months, and trusts that one of those months it will be her turn to take out the £1,000.
@@ -77,11 +79,15 @@ It puts the practices of trust on a shared, transparent foundation — and then 
 
 ## A small note on where we are
 
-We're in early access. We are working with a small group of organisers running real circles in their own communities. If the things you've just read sound like the kind of group you already run, or already belong to, we'd love to hear from you.
+The app is in testing right now, with a small group of organisers running real circles in their own communities. We aren't open to the public yet. If the things you've just read sound like the kind of group you already run, or already belong to, we'd love to hear from you.
 
 ## Be part of it
 
-- **Already running a circle?** Tell us about it at **[roscas.io/your-circle](https://roscas.io/your-circle)** — we're looking for organisers to help shape the app.
+- **Already running a circle?** Tell us about it at **[roscas.io/your-circle](https://roscas.io/your-circle)** — we're looking for organisers to shape the app before it goes public.
 - **Just curious?** Follow along on [Facebook](https://www.facebook.com/616904701512859) and [Instagram](https://www.instagram.com/roscasteam/) — we share what we're learning as we build.
 
 Trust is the currency every savings circle runs on. It's older than any bank. It will outlast any platform. We're just trying to make it easier to keep alive.
+
+---
+
+*More in this series: [Running a Paluwagan? Keep Your Circle, Lose the Spreadsheet](/blog/paluwagan-app) · [Running an Ajo or Esusu? Keep Your Circle, Lose the Spreadsheet](/blog/ajo-esusu-app) · [What's a ROSCA? The Community Savings Tradition Older Than Banks](/blog/whats-a-rosca)*
