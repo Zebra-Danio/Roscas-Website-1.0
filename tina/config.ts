@@ -72,7 +72,7 @@ export default defineConfig({
             type: "image",
             name: "coverImage",
             label: "Cover Image",
-            required: true,
+            required: false, // posts without a cover render with no hero
           },
           {
             type: "string",

@@ -1,10 +1,18 @@
 import React from 'react';
+import fs from 'fs';
+import path from 'path';
 import Image from 'next/image';
 import { format } from 'date-fns';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import type { TinaMarkdownContent } from 'tinacms/dist/rich-text';
 import BlogCTA from '@/components/blog-cta';
+
+function coverImageExists(src: string) {
+  if (!src) return false;
+  const relative = src.replace(/^\//, '');
+  return fs.existsSync(path.join(process.cwd(), 'public', relative));
+}
 
 // Matches the TinaClientData interface from page.tsx
 interface StaticPostData {
@@ -49,6 +57,7 @@ const BlogPostStatic = ({ data }: BlogPostStaticProps) => {
         ← Back to all posts
       </Link>
       
+      {coverImageExists(postData.coverImage) && (
       <div className="relative mb-8 aspect-[16/9] w-full overflow-hidden rounded-xl">
         <Image
           src={postData.coverImage}
@@ -58,6 +67,7 @@ const BlogPostStatic = ({ data }: BlogPostStaticProps) => {
           className="object-cover"
         />
       </div>
+      )}
       
       <div className="mb-8">
         <h1 className="mb-4 text-4xl font-bold">{postData.title}</h1>
@@ -81,7 +91,19 @@ const BlogPostStatic = ({ data }: BlogPostStaticProps) => {
       </div>
       
       <div className="prose prose-lg mx-auto max-w-prose dark:prose-invert">
-        <ReactMarkdown>{typeof postData.body === 'string' ? postData.body : ''}</ReactMarkdown>
+        <ReactMarkdown
+          components={{
+            img: ({ src, alt }) => (
+              <img
+                src={src}
+                alt={alt || ''}
+                className="mx-auto my-6 h-auto w-auto max-h-[480px] max-w-[220px] rounded-xl border bg-background shadow-sm"
+              />
+            ),
+          }}
+        >
+          {typeof postData.body === 'string' ? postData.body : ''}
+        </ReactMarkdown>
       </div>
 
       <div className="mx-auto max-w-prose">

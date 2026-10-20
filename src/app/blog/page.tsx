@@ -8,6 +8,11 @@ import matter from 'gray-matter';
 import type { Metadata } from 'next';
 import BlogPageClient from './BlogPageClient';
 
+function publicImageExists(src: string) {
+  if (!src) return false;
+  return fs.existsSync(path.join(process.cwd(), 'public', src.replace(/^\//, '')));
+}
+
 export const metadata: Metadata = {
   title: 'Blog – Community Savings Insights & Tips',
   description:
@@ -108,6 +113,7 @@ export default async function BlogPage() {
                 <h2 className="mb-8 text-3xl font-bold">Latest Post</h2>
                 <div className="overflow-hidden rounded-xl border shadow-md transition-shadow hover:shadow-lg">
                   <Link href={`/blog/${posts[0]._sys.filename}`}>
+                    {publicImageExists(posts[0].coverImage) && (
                     <div className="relative aspect-video w-full">
                       <Image
                         src={posts[0].coverImage}
@@ -116,6 +122,7 @@ export default async function BlogPage() {
                         className="object-cover"
                       />
                     </div>
+                    )}
                     <div className="p-6">
                       <h3 className="mb-2 text-2xl font-bold">{posts[0].title}</h3>
                       <p className="mb-4 text-sm text-muted-foreground">
@@ -150,6 +157,7 @@ export default async function BlogPage() {
                       href={`/blog/${post._sys.filename}`}
                       className="group overflow-hidden rounded-lg border p-4 transition-colors hover:bg-secondary/20"
                     >
+                      {publicImageExists(post.coverImage) && (
                       <div className="relative mb-4 aspect-video overflow-hidden rounded-md">
                         <Image
                           src={post.coverImage}
@@ -158,6 +166,7 @@ export default async function BlogPage() {
                           className="object-cover transition-transform group-hover:scale-105"
                         />
                       </div>
+                      )}
                       <h3 className="mb-2 text-xl font-semibold">{post.title}</h3>
                       <p className="text-sm text-muted-foreground">
                         {format(new Date(post.date), 'MMMM d, yyyy')}

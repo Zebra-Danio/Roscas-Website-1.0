@@ -46,7 +46,7 @@ export default function BlogPageClient() {
               title: nodeData.title,
               date: nodeData.date,
               tags: nodeData.tags,
-              coverImage: nodeData.coverImage,
+              coverImage: nodeData.coverImage || '',
               body: nodeData.body,
               _sys: nodeData._sys as SystemInfo, // Cast _sys to ensure it matches
             });
@@ -114,6 +114,7 @@ export default function BlogPageClient() {
               <h2 className="mb-8 text-3xl font-bold">Latest Post</h2>
               <div className="overflow-hidden rounded-xl border shadow-md transition-shadow hover:shadow-lg">
                 <Link href={`/blog/${posts[0]._sys.filename}`}>
+                  {posts[0].coverImage && (
                   <div className="relative aspect-video w-full">
                     <Image
                       src={posts[0].coverImage}
@@ -122,6 +123,7 @@ export default function BlogPageClient() {
                       className="object-cover"
                     />
                   </div>
+                  )}
                   <div className="p-6">
                     <h3 className="mb-2 text-2xl font-bold">{posts[0].title}</h3>
                     <p className="mb-4 text-sm text-muted-foreground">
@@ -158,6 +160,7 @@ export default function BlogPageClient() {
                     href={`/blog/${post._sys.filename}`}
                     className="group overflow-hidden rounded-lg border p-4 transition-colors hover:bg-secondary/20"
                   >
+                    {post.coverImage && (
                     <div className="relative mb-4 aspect-video overflow-hidden rounded-md">
                       <Image
                         src={post.coverImage}
@@ -166,6 +169,7 @@ export default function BlogPageClient() {
                         className="object-cover transition-transform group-hover:scale-105"
                       />
                     </div>
+                    )}
                     <h3 className="mb-2 text-xl font-semibold">{post.title}</h3>
                     <p className="text-sm text-muted-foreground">
                       {format(new Date(post.date), 'MMMM d, yyyy')}

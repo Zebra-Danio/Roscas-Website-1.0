@@ -154,7 +154,7 @@ async function fetchTinaData(slug: string): Promise<TinaDataProps | null> {
       title: tinaPost.title,
       date: tinaPost.date,
       tags: tinaPost.tags?.filter(Boolean) as string[] || [], // Handle optional tags and ensure string[]
-      coverImage: tinaPost.coverImage,
+      coverImage: tinaPost.coverImage || '',
       body: tinaPost.body, // tinaPost.body is likely TinaMarkdownContent, matches union type
       _sys: { filename: tinaPost._sys.filename }, 
     };

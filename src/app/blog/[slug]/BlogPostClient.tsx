@@ -39,6 +39,7 @@ const BlogPostClient = (props: TinaDataProps) => {
         ← Back to all posts
       </Link>
       
+      {postData.coverImage && (
       <div className="relative mb-8 aspect-[16/9] w-full overflow-hidden rounded-xl">
         <Image
           src={postData.coverImage}
@@ -48,6 +49,7 @@ const BlogPostClient = (props: TinaDataProps) => {
           className="object-cover"
         />
       </div>
+      )}
       
       <div className="mb-8">
         <h1 className="mb-4 text-4xl font-bold">{postData.title}</h1>
