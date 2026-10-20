@@ -5,7 +5,7 @@ tags:
   - Chama
   - Savings Circle
   - Rosca
-coverImage: ''
+coverImage: /images/posts/chama-app.png
 metaTitle: "Chama App — Keep Your Chama, Lose the Spreadsheet"
 metaDescription: "Run your chama's merry-go-round exactly the way you always have. Roscas is a free app that tracks contributions, turns and payouts. No fees, no cut of the pot — ever."
 ---

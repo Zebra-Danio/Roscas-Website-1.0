@@ -1,25 +1,47 @@
 import fs from 'fs';
 import path from 'path';
+import matter from 'gray-matter';
 
-// Utility to get all blog slugs for static generation
-export async function getAllSlugs() {
-  const contentDir = path.join(process.cwd(), 'content', 'posts');
-  // Add error handling in case directory doesn't exist
+const contentDir = path.join(process.cwd(), 'content', 'posts');
+
+// Scheduled publishing: a post whose frontmatter date is still in the future is
+// left out of production builds entirely (page, index, sitemap, metadata).
+// The daily scheduled deploy picks it up on its date. Dev mode shows everything.
+export function isPublished(date: string | Date | undefined) {
+  if (process.env.NODE_ENV !== 'production') return true;
+  if (!date) return true;
+  return new Date(date).getTime() <= Date.now();
+}
+
+export interface PostFile {
+  slug: string;
+  filePath: string;
+  data: { [key: string]: unknown };
+  content: string;
+}
+
+// All posts that are published as of this build
+export function getPublishedPostFiles(): PostFile[] {
   if (!fs.existsSync(contentDir)) {
     console.warn(`Content directory not found: ${contentDir}`);
     return [];
   }
-  const files = fs.readdirSync(contentDir);
-  
-  return files.map(file => {
-    // Filter out potential non-markdown files if necessary
-    if (!file.match(/\.(md|mdx)$/)) {
-      return null;
-    }
-    return {
-      slug: file.replace(/\.(md|mdx)$/, '')
-    };
-  }).filter(Boolean) as { slug: string }[]; // Filter out nulls and assert type
+  return fs
+    .readdirSync(contentDir)
+    .filter((file) => /\.(md|mdx)$/.test(file))
+    .map((file) => {
+      const filePath = path.join(contentDir, file);
+      const { data, content } = matter(fs.readFileSync(filePath, 'utf8'));
+      return { slug: file.replace(/\.(md|mdx)$/, ''), filePath, data, content };
+    })
+    .filter((post) => isPublished(post.data.date as string | undefined));
 }
 
-// You could add other blog-related utility functions here, e.g., getPostBySlug 
+export function getPublishedPostFile(slug: string): PostFile | null {
+  return getPublishedPostFiles().find((post) => post.slug === slug) || null;
+}
+
+// Utility to get all blog slugs for static generation
+export async function getAllSlugs() {
+  return getPublishedPostFiles().map(({ slug }) => ({ slug }));
+}

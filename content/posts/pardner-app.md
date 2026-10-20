@@ -1,11 +1,11 @@
 ---
 title: "Running a pardner? Keep your hand, lose the notebook"
-date: 2026-10-20T08:30:00.000Z
+date: 2027-04-20T09:00:00.000Z
 tags:
   - Pardner
   - Savings Circle
   - Rosca
-coverImage: ''
+coverImage: /images/posts/pardner-app.jpg
 metaTitle: "Running a Pardner? Keep Your Hand, Lose the Notebook"
 metaDescription: "The pardner hand has run on trust and a banker's notebook for generations — from Windrush to today. Here's what good bankers do, and a free app that keeps the book without ever touching the money."
 ---

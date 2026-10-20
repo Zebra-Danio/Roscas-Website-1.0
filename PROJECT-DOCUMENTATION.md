@@ -98,9 +98,10 @@ Two cookieless, GDPR/PECR-compliant tools, both wired in [src/app/layout.tsx](./
 - Site-wide metadata defaults (title template, OG, Twitter cards, robots) live in [src/app/layout.tsx](./src/app/layout.tsx).
 - Each page exports `export const metadata` for its specific title/description.
 - Blog post metadata is generated dynamically by `generateMetadata` in [src/app/blog/[slug]/page.tsx](./src/app/blog/[slug]/page.tsx), reading the post's frontmatter (`metaTitle`, `metaDescription`) and content. The root layout appends `| Roscas` to every title, so `metaTitle` must not include it.
-- `public/sitemap.xml` is **manually maintained** — when you add a blog post, append a `<url>` entry. Also includes `/your-circle`, `/get-started` and `/community-liaison` (acquisition routes). `public/robots.txt` points crawlers at the sitemap.
+- `/sitemap.xml` is **generated at build** by [src/app/sitemap.ts](./src/app/sitemap.ts) from the published posts plus the static routes. Don't hand-edit it. It also includes `/your-circle`, `/get-started` and `/community-liaison` (acquisition routes). `public/robots.txt` points crawlers at the sitemap.
 - Blog posts live in `content/posts/` (21 posts as of 20 Oct 2026). Cover images go in `public/images/posts/`. Posts staged ahead of publishing wait in `content/queued/`, which the build ignores.
-- Unknown URLs don't 404: `firebase.json` rewrites `**` to `/index.html`, so a missing post returns the homepage with HTTP 200. When verifying a deploy, check the page title, not just the status code.
+- **Scheduled publishing:** a post whose frontmatter `date` is in the future is excluded from production builds (page, index, sitemap, metadata) by `isPublished()` in [src/lib/blogUtils.ts](./src/lib/blogUtils.ts). Dev mode shows every post. A daily GitHub Actions deploy picks each one up on its date (see DEVELOPER-GUIDE).
+- Unknown URLs return a real **404** (`out/404.html`). There is no catch-all rewrite, because every route is prerendered.
 
 ## Development, Deployment and Rollback
 
@@ -119,7 +120,7 @@ Day-to-day commands (`npm run dev`, `npm run deploy`, `npm run stop`), branching
 - `sync-tina-media.js`: Script to verify media files before deployment.
 - `public/admin-redirect.html`: Redirect page to access the TinaCMS admin UI running on port 4001.
 - `firebase.json`: Firebase configuration. Specifies `hosting: { "public": "out", ... }` to deploy the Next.js static export output. No Cloud Functions are used.
-- `public/robots.txt` and `public/sitemap.xml`: Search-engine instructions; sitemap is hand-maintained.
+- `public/robots.txt` and `src/app/sitemap.ts`: search-engine instructions; the sitemap is generated.
 - `content/posts/`: Directory containing Markdown files for blog posts.
 - `src/app/blog/[slug]/page.tsx` (and similar dynamic route files): Implement `generateStaticParams` for SSG and data fetching logic.
 - `src/lib/forms.ts`, `src/components/forms/`: The Web3Forms submission primitives used by all four forms.

@@ -1,11 +1,11 @@
 ---
 title: "What does a savings circle organiser do when a member wants to leave?"
-date: 2026-10-20T08:40:00.000Z
+date: 2027-06-20T09:00:00.000Z
 tags:
   - Savings Circle
   - Organisers
   - Trust
-coverImage: ''
+coverImage: /images/posts/leaving-a-savings-circle.jpg
 metaTitle: "When a Member Wants to Leave Your Savings Circle"
 metaDescription: "A member asking to leave is not a broken circle — it is an arithmetic problem with four honest answers. A practical guide for savings-circle organisers."
 ---

@@ -1,0 +1,71 @@
+# Scheduled publishing (BRIEF-007 / APPROVAL-007)
+#
+# Rebuilds main every day and deploys it to Firebase Hosting (live). Blog posts
+# whose frontmatter date is still in the future are left out of the build
+# (src/lib/blogUtils.ts), so each one goes live on the first run after its date.
+#
+# Needs two repository secrets (Settings → Secrets and variables → Actions):
+#   FIREBASE_SERVICE_ACCOUNT_ROSCAS_WEBSITE_1  service-account JSON with Firebase Hosting Admin
+#   NEXT_PUBLIC_WEB3FORMS_KEY                  same value as .env.local
+# `firebase init hosting:github` creates the first one for you. Until it exists
+# the workflow skips the deploy instead of failing.
+#
+# Anything merged to main also goes live on the next run, so keep main deployable.
+
+name: Scheduled deploy
+
+on:
+  schedule:
+    - cron: '15 9 * * *' # 09:15 UTC daily; posts are dated 09:00 UTC
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-live
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      HAS_FIREBASE_SECRET: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ROSCAS_WEBSITE_1 != '' }}
+    steps:
+      - name: Skip if deploy secret is missing
+        if: env.HAS_FIREBASE_SECRET != 'true'
+        run: echo "::warning::FIREBASE_SERVICE_ACCOUNT_ROSCAS_WEBSITE_1 is not set; nothing deployed."
+
+      - uses: actions/checkout@v4
+        if: env.HAS_FIREBASE_SECRET == 'true'
+
+      - uses: actions/setup-node@v4
+        if: env.HAS_FIREBASE_SECRET == 'true'
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        if: env.HAS_FIREBASE_SECRET == 'true'
+        run: npm ci --no-audit --no-fund
+
+      - name: Generate Tina client
+        if: env.HAS_FIREBASE_SECRET == 'true'
+        run: npx tinacms build --local --skip-cloud-checks --skip-search-index --noTelemetry
+
+      - name: Build static export
+        if: env.HAS_FIREBASE_SECRET == 'true'
+        run: |
+          if [ -z "$NEXT_PUBLIC_WEB3FORMS_KEY" ]; then
+            echo "::error::NEXT_PUBLIC_WEB3FORMS_KEY secret is missing; forms would break. Not deploying."
+            exit 1
+          fi
+          npx next build
+        env:
+          NEXT_PUBLIC_WEB3FORMS_KEY: ${{ secrets.NEXT_PUBLIC_WEB3FORMS_KEY }}
+
+      - name: Deploy to Firebase Hosting (live)
+        if: env.HAS_FIREBASE_SECRET == 'true'
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ROSCAS_WEBSITE_1 }}
+          projectId: roscas-website-1
+          channelId: live

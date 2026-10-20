@@ -1,11 +1,11 @@
 ---
 title: "What should a savings circle organiser write down before the first contribution?"
-date: 2026-10-20T08:55:00.000Z
+date: 2027-09-20T09:00:00.000Z
 tags:
   - Savings Circle
   - Organisers
   - Rosca
-coverImage: ''
+coverImage: /images/posts/starting-a-savings-circle.jpg
 metaTitle: "How to Start a Savings Circle: What to Write Down First"
 metaDescription: "Seven things every paluwagan, ajo, chama or pardner organiser should agree and write down before the first contribution. A practical checklist, and a free app that records your circle exactly as you run it."
 ---

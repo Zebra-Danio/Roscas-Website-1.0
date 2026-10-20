@@ -1,11 +1,11 @@
 ---
 title: "Who's paid, whose turn, no chasing: what circle organisers actually spend time on"
-date: 2026-10-20T08:15:00.000Z
+date: 2027-01-20T09:00:00.000Z
 tags:
   - Savings Circle
   - Organisers
   - Rosca
-coverImage: ''
+coverImage: /images/posts/savings-circle-organiser-workload.png
 metaTitle: "Who's Paid, Whose Turn, No Chasing: What Savings Circle Organisers Actually Do"
 metaDescription: "An honest breakdown of the five jobs every savings circle organiser really does — and how to hand four of them back. Practical advice for paluwagan, ajo, esusu, chama and pardner organisers. Free app, no fees ever."
 ---

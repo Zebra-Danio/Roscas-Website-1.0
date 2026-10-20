@@ -3,38 +3,25 @@ import BlogPostClient from './BlogPostClient';
 import BlogPostStatic from './BlogPostStatic';
 import client from '../../../../tina/__generated__/client';
 import { notFound } from 'next/navigation';
-import fs from 'fs';
 import path from 'path';
-import matter from 'gray-matter';
 import type { Metadata } from 'next';
 import type { PostQuery } from '../../../../tina/__generated__/types';
 import type { TinaMarkdownContent } from 'tinacms/dist/rich-text';
-import { getAllSlugs } from '@/lib/blogUtils';
+import { getAllSlugs, getPublishedPostFile } from '@/lib/blogUtils';
 
 interface Props {
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-function readPostFrontmatter(slug: string) {
-  const contentDir = path.join(process.cwd(), 'content', 'posts');
-  const extensions = ['.md', '.mdx'];
-  for (const ext of extensions) {
-    const filePath = path.join(contentDir, `${slug}${ext}`);
-    if (fs.existsSync(filePath)) {
-      const raw = fs.readFileSync(filePath, 'utf8');
-      return matter(raw);
-    }
-  }
-  return null;
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const parsed = readPostFrontmatter(slug);
+  const parsed = getPublishedPostFile(slug);
   if (!parsed) return {};
 
-  const { data: fm, content } = parsed;
+  const { content } = parsed;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- free-form frontmatter
+  const fm = parsed.data as Record<string, any>;
   const title = (fm.metaTitle || fm.title || slug).trim();
   const description =
     fm.metaDescription?.trim() ||
@@ -91,18 +78,12 @@ interface TinaDataProps {
 async function fetchTinaData(slug: string): Promise<TinaDataProps | null> {
   if (process.env.NODE_ENV === 'production') {
     try {
-      const contentDir = path.join(process.cwd(), 'content', 'posts');
-      let filePath = '';
-      if (fs.existsSync(path.join(contentDir, `${slug}.md`))) {
-        filePath = path.join(contentDir, `${slug}.md`);
-      } else if (fs.existsSync(path.join(contentDir, `${slug}.mdx`))) {
-        filePath = path.join(contentDir, `${slug}.mdx`);
-      } else {
-        return null;
-      }
-      const fileContent = fs.readFileSync(filePath, 'utf8');
-      const { data: frontmatter, content } = matter(fileContent);
-      
+      const post = getPublishedPostFile(slug);
+      if (!post) return null;
+      const { filePath, content } = post;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- free-form frontmatter
+      const frontmatter = post.data as Record<string, any>;
+
       const postDataForClient: TinaClientData['post'] = {
         title: frontmatter.title || '',
         date: frontmatter.date || '',

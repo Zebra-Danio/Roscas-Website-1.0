@@ -1,11 +1,11 @@
 ---
 title: "What happens if someone in your savings circle stops paying?"
-date: 2026-10-20T08:20:00.000Z
+date: 2027-02-20T09:00:00.000Z
 tags:
   - Savings Circle
   - Organisers
   - Trust
-coverImage: ''
+coverImage: /images/posts/savings-circle-someone-stops-paying.jpg
 metaTitle: "What Happens If Someone in Your Savings Circle Stops Paying?"
 metaDescription: "The honest answer — and what experienced organisers actually do about it, before and after a payout. Practical guidance for paluwagan, ajo, esusu, chama, dhukuti and pardner circles. Free app, no fees ever."
 ---

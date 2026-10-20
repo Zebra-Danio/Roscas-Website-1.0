@@ -1,11 +1,11 @@
 ---
 title: "Can two people share one place in a savings circle?"
-date: 2026-10-20T08:50:00.000Z
+date: 2027-08-20T09:00:00.000Z
 tags:
   - Savings Circle
   - Organisers
   - Rosca
-coverImage: ''
+coverImage: /images/posts/sharing-a-slot.jpg
 metaTitle: "Can Two People Share One Place in a Savings Circle?"
 metaDescription: "Half a hand, a shared slot, a double hand — savings circles have always bent the \"one person, one place\" rule. How organisers keep it clean, and a free app that records the seat exactly as your circle runs it."
 ---

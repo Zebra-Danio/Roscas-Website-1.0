@@ -1,11 +1,11 @@
 ---
 title: "Dhukuti, Digital"
-date: 2026-10-20T08:05:00.000Z
+date: 2026-11-20T09:00:00.000Z
 tags:
   - Dhukuti
   - Savings Circle
   - Rosca
-coverImage: ''
+coverImage: /images/posts/dhukuti-app.png
 metaTitle: "Dhukuti App — Keep Your Dhukuti, Lose the Spreadsheet"
 metaDescription: "Run your dhukuti exactly the way your circle always has. Roscas is a free app that tracks contributions, turns and payouts. No fees, no cut of the pot — ever."
 ---

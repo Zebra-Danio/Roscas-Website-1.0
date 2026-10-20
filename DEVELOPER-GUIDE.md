@@ -50,7 +50,8 @@ All four forms email **team@roscas.io**.
 | Contact page | [src/app/contact/page.tsx](./src/app/contact/page.tsx) + `ContactForm.tsx` |
 | Site-wide SEO defaults (title template, OG, robots) | [src/app/layout.tsx](./src/app/layout.tsx) |
 | Analytics tokens (GSC verification, Cloudflare beacon) | [src/app/layout.tsx](./src/app/layout.tsx) |
-| Sitemap (manual, edit when adding posts) | [public/sitemap.xml](./public/sitemap.xml) |
+| Sitemap (generated at build from live posts) | [src/app/sitemap.ts](./src/app/sitemap.ts) |
+| Scheduled publishing (daily deploy) | [.github/workflows/scheduled-deploy.yml](./.github/workflows/scheduled-deploy.yml), date gate in [src/lib/blogUtils.ts](./src/lib/blogUtils.ts) |
 | robots.txt | [public/robots.txt](./public/robots.txt) |
 | Blog posts | [content/posts/*.md](./content/posts/) |
 
@@ -154,6 +155,10 @@ This runs:
 3. `firebase deploy --only hosting` — uploads `out/` to Firebase Hosting
 
 Live within ~60 seconds.
+
+### Scheduled deploy
+
+[.github/workflows/scheduled-deploy.yml](./.github/workflows/scheduled-deploy.yml) rebuilds `main` and deploys it every day at 09:15 UTC. Posts dated in the future are left out of the build, so each goes live on its date with no one launching anything. **Whatever is on `main` goes live on the next run**, so only merge deployable work. It needs the `FIREBASE_SERVICE_ACCOUNT_ROSCAS_WEBSITE_1` and `NEXT_PUBLIC_WEB3FORMS_KEY` repository secrets. Without the first it skips; without the second it fails rather than ship broken forms.
 
 ### Branching strategy for non-trivial work
 

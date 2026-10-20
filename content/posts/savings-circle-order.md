@@ -1,11 +1,11 @@
 ---
 title: "How do you decide the order in a savings circle?"
-date: 2026-10-20T08:25:00.000Z
+date: 2027-03-20T09:00:00.000Z
 tags:
   - Savings Circle
   - Organisers
   - Rosca
-coverImage: ''
+coverImage: /images/posts/savings-circle-order.jpg
 metaTitle: "How Do You Decide the Order in a Savings Circle?"
 metaDescription: "The draw, the agreed rotation, need-based turns and more — how paluwagan, ajo, esusu, chama, dhukuti and pardner circles decide who gets the pot first, and how to keep it fair."
 ---

@@ -1,11 +1,11 @@
 ---
 title: "Running an adashi? Keep your circle, lose the notebook"
-date: 2026-10-20T08:45:00.000Z
+date: 2027-07-20T09:00:00.000Z
 tags:
   - Adashi
   - Savings Circle
   - Rosca
-coverImage: ''
+coverImage: /images/posts/adashi-app.jpg
 metaTitle: "Running an Adashi? Keep Your Circle, Lose the Notebook"
 metaDescription: "Adashi has run on trust and one person's notebook for generations. What a good uwar adashi actually carries — and a free app that keeps the book without ever touching the money."
 ---

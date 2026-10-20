@@ -4,9 +4,9 @@ import Image from 'next/image';
 import { format } from 'date-fns';
 import fs from 'fs';
 import path from 'path';
-import matter from 'gray-matter';
 import type { Metadata } from 'next';
 import BlogPageClient from './BlogPageClient';
+import { getPublishedPostFiles } from '@/lib/blogUtils';
 
 function publicImageExists(src: string) {
   if (!src) return false;
@@ -39,25 +39,14 @@ async function getBlogPosts(): Promise<FileSystemPost[]> {
   // For production builds, use filesystem directly
   if (process.env.NODE_ENV === 'production') {
     try {
-      const postsDirectory = path.join(process.cwd(), 'content', 'posts');
-      const filenames = fs.readdirSync(postsDirectory);
-      
-      const allPosts: FileSystemPost[] = filenames.map(filename => {
-        const filePath = path.join(postsDirectory, filename);
-        const fileContents = fs.readFileSync(filePath, 'utf8');
-        const { data } = matter(fileContents);
-        
-        // Return formatted data matching the FileSystemPost interface
-        return {
-          _sys: {
-            filename: filename.replace(/\.(md|mdx)$/, '')
-          },
-          title: data.title || '',
-          date: data.date || '',
-          tags: data.tags || [],
-          coverImage: data.coverImage || '',
-        };
-      });
+      // Future-dated posts are excluded until their publish date
+      const allPosts: FileSystemPost[] = getPublishedPostFiles().map(({ slug, data }) => ({
+        _sys: { filename: slug },
+        title: (data.title as string) || '',
+        date: (data.date as string) || '',
+        tags: (data.tags as string[]) || [],
+        coverImage: (data.coverImage as string) || '',
+      }));
       
       // Sort posts by date (newest first)
       return allPosts.sort((a, b) => 

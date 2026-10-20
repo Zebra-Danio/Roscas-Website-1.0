@@ -1,11 +1,11 @@
 ---
 title: "How many people should be in your savings circle?"
-date: 2026-10-20T08:35:00.000Z
+date: 2027-05-20T09:00:00.000Z
 tags:
   - Savings Circle
   - Organisers
   - Rosca
-coverImage: ''
+coverImage: /images/posts/savings-circle-size.jpg
 metaTitle: "How Many People Should Be in a Savings Circle?"
 metaDescription: "Circle size decides three things at once: the size of the pot, the length of the wait and the trust you need. A practical guide for savings-circle organisers."
 ---

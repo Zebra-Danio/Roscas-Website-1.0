@@ -1,11 +1,11 @@
 ---
 title: "How to move your savings circle from a spreadsheet to an app (without changing how it works)"
-date: 2026-10-20T08:10:00.000Z
+date: 2026-12-20T09:00:00.000Z
 tags:
   - Savings Circle
   - Organisers
   - Rosca
-coverImage: ''
+coverImage: /images/posts/savings-circle-spreadsheet-to-app.png
 metaTitle: "How to Move Your Savings Circle From a Spreadsheet to an App"
 metaDescription: "A practical six-step guide for circle organisers moving off a spreadsheet — without changing your amounts, your turn order or how your circle works. Free app, no fees ever."
 ---

@@ -27,12 +27,6 @@ This document explains the Firebase configuration used in this project.
           }
         ]
       }
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
     ]
   }
 }
@@ -50,7 +44,7 @@ The site is built using Next.js static export and deployed to Firebase Hosting.
 - **"public": "out"** - Points to Next.js static export output directory
 - **No "functions" section** - We're intentionally not using Firebase Cloud Functions
 - **"cleanUrls": true** - Enables clean URLs without .html extensions
-- **SPA fallback** - The rewrite rule ensures client-side routing works correctly. Side effect: any unknown URL (including a post that hasn't shipped) returns the homepage with HTTP **200**, not a 404. Verify deploys by page title.
+- **No catch-all rewrite** - Every route is prerendered, so unknown URLs (including an unpublished post) get `404.html` with a real 404. The old `** → /index.html` rewrite was removed on 20 Oct 2026 (BRIEF-007) because it served the homepage with a 200 for any URL. Firebase Hosting cannot send 410.
 
 ### Important Warning
 
