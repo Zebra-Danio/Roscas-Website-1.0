@@ -32,12 +32,6 @@ const nextConfig: NextConfig = {
   },
   // If you have other MDX configurations, they would go here
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
-  eslint: {
-    // Temporarily ignore ESLint errors during build to allow deployment
-    // TODO: Fix the underlying issues (e.g., react/no-unescaped-entities in features-4.tsx)
-    // and remove this setting.
-    ignoreDuringBuilds: true,
-  },
   // Optional: Add a trailing slash to all paths
   // trailingSlash: true,
 };

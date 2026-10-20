@@ -6,7 +6,7 @@
 
 ## What this site is
 
-- Brand: **Roscas** — a free Android app for managing community savings circles (Paluwagan, Ajo, Pardna, Esusu, Chama, etc.).
+- Brand: **Roscas** — a free Android app (in early access) for managing community savings circles (Paluwagan, Ajo, Esusu, Chama, Pardner, Dhukuti, Adashi, etc.).
 - Live at: [https://roscas.io](https://roscas.io) (Firebase Hosting alias `https://roscas-website-1.web.app`).
 - Audience: UK diaspora communities.
 - Tone: warm, respectful of tradition, plain English, **UK spelling**.
@@ -17,13 +17,14 @@ It's an **acquisition engine**. Each public route exists to convert a visitor in
 
 | Route | Purpose |
 |---|---|
-| `/` | Tells the story; pushes visitors to `/get-started` and `/community-liaison` |
-| `/get-started` | **Primary CTA** — beta-tester signup form |
-| `/community-liaison` | **Secondary CTA** — paid ambassador application form |
+| `/` | Tells the story; pushes visitors to `/your-circle`, `/get-started` and `/community-liaison` |
+| `/your-circle` | **Primary CTA** (since the Circles-First release, Jul 2026) — for organisers bringing a circle they already run |
+| `/get-started` | Early-access signup form for individuals; still the site-wide header button |
+| `/community-liaison` | Ambassador application form |
 | `/contact` | General-purpose contact form for everything else |
-| `/blog` and `/blog/[slug]` | SEO + nurture content; every post ends with a CTA banner pointing at `/get-started` |
+| `/blog` and `/blog/[slug]` | SEO + nurture content; every post ends with a CTA banner pointing at `/your-circle` |
 
-All three forms email **team@roscas.io**.
+All four forms email **team@roscas.io**.
 
 ---
 
@@ -42,7 +43,9 @@ All three forms email **team@roscas.io**.
 | FAQ items | [src/components/faqs-3.tsx](./src/components/faqs-3.tsx) |
 | Footer links and social icons | [src/components/footer.tsx](./src/components/footer.tsx) |
 | End-of-blog-post CTA banner | [src/components/blog-cta.tsx](./src/components/blog-cta.tsx) |
-| Beta signup page | [src/app/get-started/page.tsx](./src/app/get-started/page.tsx) + `GetStartedForm.tsx` |
+| Organiser page (primary CTA) | [src/app/your-circle/page.tsx](./src/app/your-circle/page.tsx) + `YourCircleForm.tsx` |
+| Early-access signup page | [src/app/get-started/page.tsx](./src/app/get-started/page.tsx) + `GetStartedForm.tsx` |
+| App screenshots and walkthrough video | [src/components/app-screenshots.tsx](./src/components/app-screenshots.tsx), [src/components/walkthrough-video.tsx](./src/components/walkthrough-video.tsx); assets in `public/images/app/` and `public/videos/` |
 | Ambassador page | [src/app/community-liaison/page.tsx](./src/app/community-liaison/page.tsx) + `CommunityLiaisonForm.tsx` |
 | Contact page | [src/app/contact/page.tsx](./src/app/contact/page.tsx) + `ContactForm.tsx` |
 | Site-wide SEO defaults (title template, OG, robots) | [src/app/layout.tsx](./src/app/layout.tsx) |
@@ -69,7 +72,7 @@ All three forms email **team@roscas.io**.
 
 ## Forms architecture (Web3Forms)
 
-The site is statically exported (no Next.js API routes), so all three forms POST directly from the browser to **Web3Forms**, which forwards the submission as an email to the address registered with the access key (currently `team@roscas.io`).
+The site is statically exported (no Next.js API routes), so all four forms POST directly from the browser to **Web3Forms**, which forwards the submission as an email to the address registered with the access key (currently `team@roscas.io`).
 
 ### Environment variable
 
@@ -83,11 +86,12 @@ NEXT_PUBLIC_WEB3FORMS_KEY=<access key from web3forms.com>
 
 ### How a form submission flows
 
-1. User fills form on `/get-started`, `/community-liaison`, or `/contact`.
+1. User fills form on `/your-circle`, `/get-started`, `/community-liaison`, or `/contact`.
 2. Form's `onSubmit` builds a payload and calls `submitForm(payload, { subject, from_name })` from [src/lib/forms.ts](./src/lib/forms.ts).
 3. `submitForm` POSTs JSON to `https://api.web3forms.com/submit` with the access key.
 4. Web3Forms emails the submission to `team@roscas.io`. Email subjects:
-   - `New beta tester signup — [name]`
+   - `Your Circle signup — [name]`
+   - `New early access signup — [name]`
    - `Community Liaison application — [name]`
    - `Roscas contact form — [name]`
 5. On success, the form component shows an inline `<FormStatus variant="success" />`.
@@ -146,14 +150,14 @@ npm run deploy
 
 This runs:
 1. `node sync-tina-media.js` — verifies media files exist
-2. `next build` — builds static export to `out/`
+2. `next build` — lints, type-checks and builds the static export to `out/` (lint errors fail the build; warnings don't)
 3. `firebase deploy --only hosting` — uploads `out/` to Firebase Hosting
 
 Live within ~60 seconds.
 
 ### Branching strategy for non-trivial work
 
-The live site is fragile (no preview environment), so meaningful changes should go on a feature branch:
+The live site has no standing preview environment, so meaningful changes should go on a feature branch. For a throwaway preview, `firebase hosting:channel:deploy <name>` publishes `out/` to a temporary URL without touching live.
 
 ```bash
 git checkout -b feature/short-name
@@ -189,11 +193,13 @@ To find a known-good rollback target:
 git log --oneline --merges
 ```
 
-### Last known-good rollback target (current as of May 2026)
+### Last known-good rollback targets (current as of 20 Oct 2026)
 
-- `242bb76` — Analytics foundation: Search Console verification, Cloudflare Web Analytics beacon, migration brief (current live, May 2026).
-- `ff06fd0` — Spreadsheet blog post, full sitemap, docs refresh.
-- `3dfa04f` — Community Liaison copy unification and short-sprint framing.
+- `8fa9deb` — Twelve S-series articles published, S3 Chama to S14 (BRIEF-006, live 20 Oct 2026).
+- `ddb9dc8` — Trust article (BRIEF-004, live 11 Sep 2026).
+- `76b93e6` — Circles-First release: `/your-circle`, walkthrough media (BRIEF-001, Jul 2026).
+
+Firebase also keeps every release: Hosting → Release history in the Firebase console has a one-click rollback that doesn't touch git.
 
 ---
 
@@ -241,8 +247,8 @@ Removes `node_modules`, `package-lock.json`, `.next`, `out` and reinstalls.
 
 These are non-negotiable. Any change that breaks them is a bug.
 
-1. **Decision 001** — never mention blockchain, tokens, crypto, Web3, Sui, DeFi, or ROC anywhere on public pages. See [DECISION-001.md](./DECISION-001.md).
-2. **Always free.** RoscasApp is and remains free for groups using it. Do not add pricing, paid tiers, or upsell language.
+1. **Decision 001** — never mention blockchain, tokens, crypto, Web3, Sui, DeFi, or ROC anywhere on public pages. See [DECISION-001.md](./DECISION-001.md). The ops-bridge rules in [CLAUDE.md](./CLAUDE.md) extend the banned list for any new copy: also wallet, testnet, mainnet, gas, scheme, investment, returns, fintech, unbanked, users.
+2. **Always free, early access.** The app is and remains free. Do not add pricing, paid tiers, or upsell language. Describe it as "early access", never "live for everyone".
 3. **UK English** in all copy (e.g. "prioritise", "organisation", "favourite").
 4. **Mobile-first.** Test every change at narrow viewports — most users are on phones.
 5. **Static export must be preserved.** No Next.js API routes, no SSR, no `output: 'standalone'`. Forms use external services.
@@ -254,6 +260,7 @@ These are non-negotiable. Any change that breaks them is a bug.
 
 If you're an AI assistant being onboarded to this codebase, check in this order:
 
+0. [CLAUDE.md](./CLAUDE.md) — the ops-bridge inbox check comes before anything else.
 1. This file (`DEVELOPER-GUIDE.md`) — orientation.
 2. [DECISION-001.md](./DECISION-001.md) — copy constraints.
 3. [PROJECT-DOCUMENTATION.md](./PROJECT-DOCUMENTATION.md) — architecture deep-dive.
@@ -261,7 +268,7 @@ If you're an AI assistant being onboarded to this codebase, check in this order:
 
 When making changes:
 
-- **Live site is fragile.** Never deploy without explicit user confirmation, even if the change seems safe.
+- **Never deploy without authorisation:** either explicit user confirmation, or the matching `APPROVAL-nnn.md` in the bridge for a briefed deploy.
 - **Branch for any non-trivial change.** Use `feature/<name>` and `--no-ff` merges.
 - **Check Decision 001** on every public-copy change.
 - **Run `npm run dev` and let the user click around** before deploying.

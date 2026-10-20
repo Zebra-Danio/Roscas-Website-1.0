@@ -4,7 +4,7 @@
 
 ## Project Overview
 
-This is a Next.js website with TinaCMS integration for blog content management, deployed on Firebase Hosting as a static site. The site is structured as an acquisition engine with three lead-capture forms that submit to `team@roscas.io` via Web3Forms. This document outlines the current architecture, development workflow, and critical implementation details.
+This is a Next.js website with TinaCMS integration for blog content management, deployed on Firebase Hosting as a static site. The site is structured as an acquisition engine with four lead-capture forms that submit to `team@roscas.io` via Web3Forms. This document outlines the current architecture, development workflow, and critical implementation details.
 
 ## Architecture
 
@@ -21,8 +21,9 @@ This is a Next.js website with TinaCMS integration for blog content management, 
 | Route | File | Purpose |
 |---|---|---|
 | `/` | [src/app/page.tsx](./src/app/page.tsx) | Long-scroll homepage |
-| `/get-started` | [src/app/get-started/page.tsx](./src/app/get-started/page.tsx) | Beta tester signup form |
-| `/community-liaison` | [src/app/community-liaison/page.tsx](./src/app/community-liaison/page.tsx) | Paid ambassador role + application form |
+| `/your-circle` | [src/app/your-circle/page.tsx](./src/app/your-circle/page.tsx) | Organiser signup — primary CTA |
+| `/get-started` | [src/app/get-started/page.tsx](./src/app/get-started/page.tsx) | Early-access signup form |
+| `/community-liaison` | [src/app/community-liaison/page.tsx](./src/app/community-liaison/page.tsx) | Ambassador role + application form |
 | `/contact` | [src/app/contact/page.tsx](./src/app/contact/page.tsx) | General contact form |
 | `/blog` | [src/app/blog/page.tsx](./src/app/blog/page.tsx) | Blog listing |
 | `/blog/[slug]` | [src/app/blog/[slug]/page.tsx](./src/app/blog/[slug]/page.tsx) | Blog post detail (with end-of-post CTA) |
@@ -31,8 +32,8 @@ This is a Next.js website with TinaCMS integration for blog content management, 
 
 ### Static Site Generation
 
-- The site uses Next.js static export (`output: 'export'` in `next.config.js`).
-- Associated SSG settings in `next.config.js` include `images: { unoptimized: true }` (required for `next/image` with static export).
+- The site uses Next.js static export (`output: 'export'` in `next.config.ts`).
+- Associated SSG settings in `next.config.ts` include `images: { unoptimized: true }` (required for `next/image` with static export).
 - All pages, including blog content (using `generateStaticParams`), are pre-rendered at build time.
 - This approach was chosen over Server-Side Rendering (SSR) due to:
   - Simpler deployment to Firebase Hosting
@@ -65,14 +66,16 @@ This is a Next.js website with TinaCMS integration for blog content management, 
 ### Markdown Rendering in Production
 
 - For static export, blog post content (Markdown body) is rendered to HTML using `react-markdown` during the build process. This avoids issues encountered with other MDX solutions during static export.
+- Inline Markdown images (e.g. app screenshots from `/images/app/`) render as a centred phone-sized frame (`BlogPostStatic.tsx`).
+- `coverImage` is optional. When it is empty or the file is missing from `public/`, the article hero and index-card image are skipped and no OG image is emitted.
 
 ### Build Health and Linting
 
-- ESLint and TypeScript checks are enabled in `next.config.js` (`eslint: { ignoreDuringBuilds: false }`, `typescript: { ignoreBuildErrors: false }`) to maintain code quality and catch errors early. It's crucial to keep these enabled.
+- `next build` runs ESLint (flat config in `eslint.config.mjs`) and the TypeScript check; errors fail the build, warnings don't. Neither is switched off in `next.config.ts`, so keep it that way. Run `npm run lint` on its own to see warnings.
 
 ### Forms (Web3Forms)
 
-Because the site is statically exported, there are no Next.js API routes available. All three lead-capture forms (`/get-started`, `/community-liaison`, `/contact`) POST directly from the browser to Web3Forms, which forwards each submission as an email to `team@roscas.io`.
+Because the site is statically exported, there are no Next.js API routes available. All four lead-capture forms (`/your-circle`, `/get-started`, `/community-liaison`, `/contact`) POST directly from the browser to Web3Forms, which forwards each submission as an email to `team@roscas.io`.
 
 - Submission helper: [src/lib/forms.ts](./src/lib/forms.ts) (`submitForm(payload, options)`)
 - Reusable field components: [src/components/forms/FormField.tsx](./src/components/forms/FormField.tsx) (`TextField`, `TextareaField`, `SelectField`)
@@ -94,79 +97,18 @@ Two cookieless, GDPR/PECR-compliant tools, both wired in [src/app/layout.tsx](./
 
 - Site-wide metadata defaults (title template, OG, Twitter cards, robots) live in [src/app/layout.tsx](./src/app/layout.tsx).
 - Each page exports `export const metadata` for its specific title/description.
-- Blog post metadata is generated dynamically by `generateMetadata` in [src/app/blog/[slug]/page.tsx](./src/app/blog/[slug]/page.tsx), reading the post's frontmatter and content.
-- `public/sitemap.xml` is **manually maintained** — when you add a blog post, append a `<url>` entry. Also includes `/get-started` and `/community-liaison` (acquisition routes). `public/robots.txt` points crawlers at the sitemap.
-- Blog posts live in `content/posts/` (5 posts as of May 2026). Cover images go in `public/images/posts/`.
+- Blog post metadata is generated dynamically by `generateMetadata` in [src/app/blog/[slug]/page.tsx](./src/app/blog/[slug]/page.tsx), reading the post's frontmatter (`metaTitle`, `metaDescription`) and content. The root layout appends `| Roscas` to every title, so `metaTitle` must not include it.
+- `public/sitemap.xml` is **manually maintained** — when you add a blog post, append a `<url>` entry. Also includes `/your-circle`, `/get-started` and `/community-liaison` (acquisition routes). `public/robots.txt` points crawlers at the sitemap.
+- Blog posts live in `content/posts/` (21 posts as of 20 Oct 2026). Cover images go in `public/images/posts/`. Posts staged ahead of publishing wait in `content/queued/`, which the build ignores.
+- Unknown URLs don't 404: `firebase.json` rewrites `**` to `/index.html`, so a missing post returns the homepage with HTTP 200. When verifying a deploy, check the page title, not just the status code.
 
-## Development Workflow
+## Development, Deployment and Rollback
 
-1. **Start Development**:
-   ```
-   npm run dev
-   ```
-   This starts:
-   - Next.js development server
-   - TinaCMS development server
-   - Media proxy server
+Day-to-day commands (`npm run dev`, `npm run deploy`, `npm run stop`), branching, and rollback are documented once, in [DEVELOPER-GUIDE.md](./DEVELOPER-GUIDE.md). Key facts:
 
-2. **Edit Content**:
-   - Access TinaCMS admin at http://localhost:3000/admin-redirect.html
-   - Make content changes
-   - Save changes (automatically updates markdown files)
-
-3. **View Changes**:
-   - Changes are immediately visible at http://localhost:3000
-
-4. **Stop Development**:
-   ```
-   npm run stop
-   ```
-   This kills all development servers (ports 3000, 4001, 5001, 9000)
-
-5. **Important Notes for Building**:
-   - On Windows, if `EPERM` or `ENOENT` errors occur during `npm run build`, try running the command in a terminal with **Administrator privileges**.
-
-## Deployment Workflow
-
-1. **Prepare for Deployment**:
-   ```
-   npm run deploy
-   ```
-   This executes `node sync-tina-media.js && npm run build && firebase deploy --only hosting`, which:
-   - Verifies media files with `sync-tina-media.js`
-   - Builds the static site with `next build` (outputs to the `out/` directory)
-   - Deploys the contents of `out/` to Firebase Hosting.
-
-2. **Deployed Site**:
-   - The site is available at [https://roscas.io](https://roscas.io) (custom domain)
-   - Firebase alias: [https://roscas-website-1.web.app](https://roscas-website-1.web.app)
-   - TinaCMS admin is **NOT** available on the deployed site
-
-## Branching & Rollback
-
-The live site has no preview environment, so meaningful changes should land via a feature branch and a `--no-ff` merge so the merge commit is a single revert target.
-
-```bash
-git checkout -b feature/short-name
-# work, test locally
-git commit -am "feat: ..."
-git push -u origin feature/short-name
-git checkout main
-git merge --no-ff feature/short-name -m "Merge branch 'feature/short-name': summary"
-git push origin main
-npm run deploy
-```
-
-**Rollback** (live site is broken after a deploy):
-
-```bash
-git checkout main
-git revert HEAD
-npm run deploy
-git push origin main
-```
-
-For a deeper dive into the branching/deploy workflow see [DEVELOPER-GUIDE.md](./DEVELOPER-GUIDE.md).
+- `npm run deploy` runs `sync-tina-media.js`, then `next build` into `out/`, then `firebase deploy --only hosting`.
+- Live at [https://roscas.io](https://roscas.io), Firebase alias [https://roscas-website-1.web.app](https://roscas-website-1.web.app). The TinaCMS admin is **not** on the deployed site.
+- On Windows, `EPERM`/`ENOENT` during a build usually means a file watcher holds `.next/`; close it or use an Administrator terminal.
 
 ## Critical Files
 
@@ -180,7 +122,7 @@ For a deeper dive into the branching/deploy workflow see [DEVELOPER-GUIDE.md](./
 - `public/robots.txt` and `public/sitemap.xml`: Search-engine instructions; sitemap is hand-maintained.
 - `content/posts/`: Directory containing Markdown files for blog posts.
 - `src/app/blog/[slug]/page.tsx` (and similar dynamic route files): Implement `generateStaticParams` for SSG and data fetching logic.
-- `src/lib/forms.ts`, `src/components/forms/`: The Web3Forms submission primitives used by all three forms.
+- `src/lib/forms.ts`, `src/components/forms/`: The Web3Forms submission primitives used by all four forms.
 - `src/app/layout.tsx`: Also home to the Google Search Console verification token (`metadata.verification.google`) and the Cloudflare Web Analytics beacon `<Script>`.
 - `BRIEF-Cloudflare-Migration.md`: Decision brief for moving DNS to Cloudflare. Status: deferred; JS-beacon-only path was implemented instead. Revisit when the triggers in §7 of the brief fire.
 - `.env.local`: Holds `NEXT_PUBLIC_WEB3FORMS_KEY`. Gitignored. Example committed at `.env.local.example`.
@@ -211,7 +153,7 @@ For a deeper dive into the branching/deploy workflow see [DEVELOPER-GUIDE.md](./
 5. **Media Proxy**: Do not remove the `tina-media-proxy.js` server; it's needed for Windows development compatibility.
 6. **Dual-Mode Data Fetching Logic**: The distinction between development (Tina API) and production (filesystem) data fetching is crucial.
 7. **Markdown Rendering with `react-markdown`**: The use of `react-markdown` for production builds is important for successful static export.
-8. **Build Health Checks**: Keep ESLint and TypeScript checks enabled in `next.config.ts` (`ignoreDuringBuilds: false`).
+8. **Build Health Checks**: Don't add `eslint.ignoreDuringBuilds` or `typescript.ignoreBuildErrors` to `next.config.ts`; fix the error instead.
 9. **Decision 001**: No blockchain / token / Web3 vocabulary on public pages. See [DECISION-001.md](./DECISION-001.md).
 10. **Forms backend**: All forms route through Web3Forms via `src/lib/forms.ts`. Don't replace this without ensuring `team@roscas.io` continues to receive every submission.
 

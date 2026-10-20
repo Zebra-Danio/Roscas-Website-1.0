@@ -50,3 +50,8 @@ node_modules
 # logs
 *.log
 pglite-debug.log
+# example env file is committed
+!.env.local.example
+# stale Tina admin copies (local only; safe to delete)
+/public/_admin/
+/public/public/

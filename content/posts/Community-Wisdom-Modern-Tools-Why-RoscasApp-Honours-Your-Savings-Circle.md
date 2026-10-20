@@ -4,7 +4,6 @@ date: 2025-05-02T23:00:00.000Z
 tags:
   - Savings Circle
   - Trust
-  - FinTech
   - Community Empowerment
   - Financial Inclusion
   - Esusu

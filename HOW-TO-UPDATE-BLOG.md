@@ -2,84 +2,68 @@
 
 A short, focused guide for adding or editing blog posts.
 
-> For wider site work (forms, pages, copy, deploy, rollback) see [DEVELOPER-GUIDE.md](./DEVELOPER-GUIDE.md).
+> For wider site work (forms, pages, copy, deploy, rollback) see [DEVELOPER-GUIDE.md](./DEVELOPER-GUIDE.md). Briefed posts arrive through the ops bridge; see [CLAUDE.md](./CLAUDE.md).
 
 ---
 
-## Quick steps
+## Where posts live
 
-### 1. Start the local site with TinaCMS
+- **Live posts:** `content/posts/<slug>.md`. The filename is the URL: `chama-app.md` → `/blog/chama-app`.
+- **Staged posts:** `content/queued/`. The build ignores this folder. See [content/queued/README.md](./content/queued/README.md).
+- **New slugs:** short kebab-case on the key term, e.g. `pardner-app`, `savings-circle-size`. (The five oldest posts have long Title-Case slugs. Leave them as they are, because they're indexed.)
 
-```bash
-npm run dev
-```
+## Frontmatter
 
-This starts three services together:
-- The site at **http://localhost:3000**
-- TinaCMS admin at **http://localhost:3000/admin-redirect.html**
-- A media proxy on port 5001
-
-### 2. Edit your posts
-
-Open the TinaCMS admin link above. Edit posts in the visual editor — your changes save automatically into `content/posts/*.md`.
-
-If you prefer, you can edit the `.md` files in `content/posts/` directly.
-
-### 3. Update the sitemap (only if you added a NEW post)
-
-Open [public/sitemap.xml](./public/sitemap.xml) and add a new `<url>` block for your post slug, for example:
-
-```xml
-<url>
-  <loc>https://roscas.io/blog/Your-Post-Slug-Here</loc>
-  <lastmod>2026-05-03</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.7</priority>
-</url>
-```
-
-The slug is the filename without the `.md` extension. Editing an existing post does not require a sitemap change.
-
-**Current posts** (5 as of May 2026): filenames in `content/posts/` match the URL slug exactly, e.g. `Tired-of-Spreadsheets-The-Future-of-Managing-Your-Savings-Circle-is-Here.md` → `/blog/Tired-of-Spreadsheets-The-Future-of-Managing-Your-Savings-Circle-is-Here`.
-
-### 4. Deploy
-
-```bash
-npm run deploy
-```
-
-Live within ~60 seconds.
-
-### 5. If something looks wrong on the live site
-
-```bash
-git revert HEAD
-npm run deploy
-```
-
-This rolls the live site back to the previous commit.
-
+```yaml
 ---
-
-## Tips for good posts
-
-- **Frontmatter required fields**: `title`, `date`, `tags`, `coverImage`. The `coverImage` should be a path under `/images/posts/...`.
-- **Tags**: 5–8 per post. See `DEVELOPER-GUIDE.md` for SEO-friendly tags. Mix specific tradition names (Paluwagan, Ajo, Esusu, Chama) with broader ones ("Community Savings", "Financial Inclusion").
-- **Cover image**: 16:9 aspect ratio works best with the listing layout.
-- **No blockchain / token / crypto language** in posts — see [DECISION-001.md](./DECISION-001.md).
-
+title: "Your Chama, Off the Spreadsheet"
+date: 2026-10-20T08:00:00.000Z
+tags:
+  - Chama
+  - Savings Circle
+  - Rosca
+coverImage: /images/posts/chama-app.png   # or '' for no hero
+metaTitle: "Chama App — Keep Your Chama, Lose the Spreadsheet"
+metaDescription: "Under ~160 characters."
 ---
+```
+
+- **`date`** is the real publish date. The index sorts newest first. To publish a series in order, space the times a few minutes apart.
+- **`metaTitle`** must **not** end in `| Roscas`. The layout appends it, and doubling it was the Post 7 defect.
+- **`coverImage`** is optional. Leave it `''` and the article and index card render without a hero. If you set one, put the file in `public/images/posts/`. 16:9 works best.
+- **Tags:** 3–8. Use tradition names (Paluwagan, Ajo, Esusu, Chama, Pardner, Dhukuti, Adashi) plus broad ones (Savings Circle, Rosca, Organisers, Trust).
+
+## Body
+
+- Standard Markdown. `##` for sections. The post's `title` is rendered as the H1, so don't repeat it in the body.
+- **App screenshots:** `![Caption](/images/app/02_circle.png)` renders as a centred phone-sized frame. Available: `01_home`, `02_circle`, `03_members`, `04_contributions`, `05_payout`, `06_delight`.
+- **CTA:** the closing link goes to `https://roscas.io/your-circle`, never `/get-started`. The end-of-post banner is added automatically (`src/components/blog-cta.tsx`).
+- **Internal links:** only link to posts that are already live. A dead `/blog/...` link won't 404. It silently shows the homepage.
+- When bringing in a draft from the bridge, strip the working header, the "Suggested…" lines and every "Internal notes" block. Don't rewrite the prose.
+
+## Publish
+
+1. Add or move the `.md` file into `content/posts/`.
+2. Add a `<url>` row to [public/sitemap.xml](./public/sitemap.xml) with the publish date as `lastmod`. Editing an existing post doesn't need a sitemap change.
+3. Run the banned-vocabulary check (see below).
+4. `npm run deploy`. It's live in about 60 seconds.
+5. Check the live URL's **page title**, not just the status code (unknown URLs return the homepage with a 200).
+
+Rollback: `git revert HEAD && npm run deploy`, or use Firebase console → Hosting → Release history.
+
+## Editing in TinaCMS (optional)
+
+`npm run dev`, then open **http://localhost:3000/admin-redirect.html**. Changes save straight into `content/posts/*.md`. Or just edit the files directly.
+
+## Copy rules
+
+UK English. The app is always free and in early access. No blockchain / token / crypto / Web3 / Sui / DeFi / wallet language ([DECISION-001.md](./DECISION-001.md)), plus the wider list in [CLAUDE.md](./CLAUDE.md). Quick check:
+
+```bash
+grep -niwE "blockchain|tokens?|crypto|web3|sui|defi|wallets?|testnet|mainnet|fintech|unbanked" content/posts/*.md
+```
 
 ## Troubleshooting
 
-**Ports already in use:**
-```bash
-npm run stop
-```
-Then re-run `npm run dev`.
-
-**Stop the local server:**
-Press `Ctrl+C` in the terminal, or run `npm run stop`.
-
-**TinaCMS shows "Unable to find record":**
-Restart `npm run dev`. Tina sometimes misses files added while it was already running.
+- **Ports already in use:** `npm run stop`, then `npm run dev` again.
+- **TinaCMS shows "Unable to find record":** restart `npm run dev`. Tina sometimes misses files added while it was running.

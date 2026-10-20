@@ -10,7 +10,17 @@ import BlogCTA from '@/components/blog-cta';
 
 // Interface for the props this component receives from the server component
 interface TinaDataProps {
-  data: any; // useTina handles the exact shape
+  data: {
+    post: {
+      title: string;
+      date: string;
+      tags: string[];
+      coverImage: string;
+      body: TinaMarkdownContent | string;
+      _sys: { filename: string };
+      id?: string;
+    };
+  };
   variables: { relativePath: string };
   query: string;
 }

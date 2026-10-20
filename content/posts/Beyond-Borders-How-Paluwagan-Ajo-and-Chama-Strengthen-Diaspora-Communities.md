@@ -6,9 +6,8 @@ tags:
   - Chama
   - Ajo
   - Paluwagan
-  - ' Fintech'
   - community
-  - rosacas
+  - Roscas
   - Savings
 coverImage: /images/posts/people-297819_1280.png
 ---

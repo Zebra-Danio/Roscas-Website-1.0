@@ -50,7 +50,7 @@ The site is built using Next.js static export and deployed to Firebase Hosting.
 - **"public": "out"** - Points to Next.js static export output directory
 - **No "functions" section** - We're intentionally not using Firebase Cloud Functions
 - **"cleanUrls": true** - Enables clean URLs without .html extensions
-- **SPA fallback** - The rewrite rule ensures client-side routing works correctly
+- **SPA fallback** - The rewrite rule ensures client-side routing works correctly. Side effect: any unknown URL (including a post that hasn't shipped) returns the homepage with HTTP **200**, not a 404. Verify deploys by page title.
 
 ### Important Warning
 
@@ -61,7 +61,9 @@ The site is built using Next.js static export and deployed to Firebase Hosting.
 1. Build the static site with `next build` (configured in next.config.ts with `output: 'export'`)
 2. Deploy to Firebase Hosting with `firebase deploy --only hosting`
 3. Use the combined script `npm run deploy` which handles media verification and deployment
+4. Preview without touching live: `firebase hosting:channel:deploy <name>` (temporary URL, expires after 7 days by default)
+5. Roll back without git: Firebase console → Hosting → Release history
 
 ## Accessing the Deployed Site
 
-The site is deployed at [roscas-website-1.web.app](https://roscas-website-1.web.app) 
+The site is live at [roscas.io](https://roscas.io), with the Firebase alias [roscas-website-1.web.app](https://roscas-website-1.web.app).

@@ -5,7 +5,6 @@ tags:
   - RoscasApp
   - Ajo
   - Esusu
-  - fintech
   - community
   - savings
   - Roscas

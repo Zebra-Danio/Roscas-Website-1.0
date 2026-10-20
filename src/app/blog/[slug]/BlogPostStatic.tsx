@@ -24,7 +24,7 @@ interface StaticPostData {
     body: TinaMarkdownContent | string; // Will be string in production
     _sys: { filename: string };
     id?: string;
-    [key: string]: any;
+    [key: string]: unknown;
   };
 }
 
